@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>agentic workflow: a phase-by-phase guide to building with coding agents</title>
+  <meta name="description" content="An interactive, phase-by-phase walkthrough of a prompt-driven workflow for AI-assisted hackathon development.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%2316131f'/%3E%3Crect%20x='15'%20y='6'%20width='2'%20height='20'%20rx='1'%20fill='%23e2a04a'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#16131f">
+  <meta property="og:title" content="agentic workflow: a phase-by-phase guide to building with coding agents">
+  <meta property="og:description" content="An interactive, phase-by-phase walkthrough of a prompt-driven workflow for AI-assisted hackathon development.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hyperzx2o.github.io/agentic-development-workflow/">
+  <meta name="twitter:card" content="summary">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css" integrity="sha384-gvLq/iOMNnPchdosgVym5huSVkKipHCQaqSw2Eg0V52Mzmlf169ZOsXcNc2cNu8x" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#journey">skip to the journey</a>
+
+  <!-- scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- N5 floating pill -->
+  <nav class="nav-pill" aria-label="primary">
+    <a class="wordmark" href="#top">agentic workflow</a>
+    <ul class="nav-pill__links">
+      <li><a href="#what">what</a></li>
+      <li><a href="#journey">journey</a></li>
+      <li><a href="#why">why</a></li>
+      <li><a href="#solo">solo</a></li>
+      <li><a href="resources.html">resources</a></li>
+    </ul>
+    <a class="cta-fill" href="https://github.com/HyperZx2O/agentic-development-workflow" target="_blank" rel="noopener">the full guide →</a>
+  </nav>
+
+  <!-- phase dropdown -->
+  <div class="phase-menu">
+    <button class="phase-menu__trigger" type="button" aria-expanded="false" aria-controls="phaseMenu" aria-label="jump to a phase">
+      <span class="phase-menu__label">phases</span>
+      <span class="phase-menu__caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="phase-menu__panel" id="phaseMenu" aria-label="phases" data-lenis-prevent-wheel>
+      <a class="phase-menu__item" href="#phase-0" data-phase="0"><span class="phase-menu__num" aria-hidden="true">0</span><span class="phase-menu__title">the idea</span></a>
+      <a class="phase-menu__item" href="#phase-1" data-phase="1"><span class="phase-menu__num" aria-hidden="true">1</span><span class="phase-menu__title">the single source of truth</span></a>
+      <a class="phase-menu__item" href="#phase-2" data-phase="2"><span class="phase-menu__num" aria-hidden="true">2</span><span class="phase-menu__title">one plan per person</span></a>
+      <a class="phase-menu__item" href="#phase-3" data-phase="3"><span class="phase-menu__num" aria-hidden="true">3</span><span class="phase-menu__title">branches, context, and a generated rules file</span></a>
+      <a class="phase-menu__item" href="#phase-4" data-phase="4"><span class="phase-menu__num" aria-hidden="true">4</span><span class="phase-menu__title">every session starts the same way</span></a>
+      <a class="phase-menu__item" href="#phase-5" data-phase="5"><span class="phase-menu__num" aria-hidden="true">5</span><span class="phase-menu__title">two audits, one table, one fix pass</span></a>
+      <a class="phase-menu__item" href="#phase-6" data-phase="6"><span class="phase-menu__num" aria-hidden="true">6</span><span class="phase-menu__title">never skip the checkpoint</span></a>
+      <a class="phase-menu__item" href="#phase-7" data-phase="7"><span class="phase-menu__num" aria-hidden="true">7</span><span class="phase-menu__title">a fresh eye on everything committed</span></a>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <h1 class="hero__title"><span class="hero__word">plan</span> <span class="hero__word">it</span> <span class="hero__word">before</span> <span class="hero__word">you</span> <em class="hero__word">build</em> <span class="hero__word">it.</span></h1>
+          <p class="hero__lede">an interactive walkthrough of a prompt-driven workflow for AI-assisted hackathon development. eight phases, each with a prompt you can copy and an exit condition you can check. built for small teams who want the discipline of a big one without the overhead.</p>
+          <div class="hero__cta">
+            <a class="btn-fill" href="#journey">start at phase 0 →</a>
+            <a class="btn-ghost" href="#what">or, what is this</a>
+          </div>
+        </div>
+
+        <!-- Lumen apparatus · filament chamber -->
+        <figure class="apparatus apparatus--filament" aria-hidden="true">
+          <div class="chamber">
+            <span class="chamber__wall"></span>
+            <span class="chamber__electrode" style="--y: 18%"></span>
+            <span class="chamber__electrode" style="--y: 38%"></span>
+            <span class="chamber__electrode" style="--y: 58%"></span>
+            <span class="chamber__electrode" style="--y: 78%"></span>
+            <span class="chamber__filament"></span>
+            <span class="chamber__glow"></span>
+            <span class="chamber__stencil">WF-08</span>
+          </div>
+          <ul class="callouts">
+            <li class="callout" style="--side: left; --y: 18%"><span>idea.md</span></li>
+            <li class="callout" style="--side: right; --y: 38%"><span>spec.md</span></li>
+            <li class="callout" style="--side: left; --y: 58%"><span>plan.md</span></li>
+            <li class="callout" style="--side: right; --y: 78%"><span>ship →</span></li>
+          </ul>
+        </figure>
+      </div>
+
+      <!-- meter strip -->
+      <aside class="meter" aria-hidden="true">
+        <p class="meter__label meter__label--left">flow · 8 phases</p>
+        <div class="meter__bars" id="meterBars"></div>
+        <p class="meter__label meter__label--right">gates · 8 exits</p>
+      </aside>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats" aria-label="workflow at a glance">
+      <div class="stat">
+        <span class="stat__num">8</span>
+        <span class="stat__label">phases</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">9</span>
+        <span class="stat__label">copyable prompts</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">3</span>
+        <span class="stat__label">guardrail skills</span>
+      </div>
+    </section>
+
+    <!-- WHAT THIS IS -->
+    <section class="section" id="what">
+      <h2 class="section__title">front-load every decision, then let the agent execute.</h2>
+      <div class="section__body">
+        <p>most teams start a hackathon by opening an editor and hoping for the best. this workflow does the opposite. every decision, constraint, and plan goes into structured documents <em>before</em> a single line of code is written. the coding agent then executes against those documents, phase by phase, and a human reviews every transition point.</p>
+        <p>the result: less debugging, fewer merge conflicts, no "wait, what are we building again" at 3am.</p>
+        <p>the whole thing runs like a loop: plan, code, test, review, repeat. each phase has a prompt to use and an exit condition to check. nothing depends on memory or improvisation. a phase is done when its checkboxes are ticked, not when it roughly feels done.</p>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="section" id="tools">
+      <h2 class="section__title">six tools and three skills.</h2>
+      <div class="tooling">
+        <div>
+          <h3 class="section__sub">tools</h3>
+          <ul class="tool-list">
+            <li><a href="https://claude.ai/"><strong>claude</strong></a> for ideation and plan generation.</li>
+            <li><a href="https://opencode.ai/"><strong>opencode</strong></a> your local agent that reads your directory and writes code.</li>
+            <li><a href="https://mimo.xiaomi.com/coder"><strong>mimo code</strong></a> an opencode clone with mimo models.</li>
+            <li><a href="https://freebuff.com/"><strong>freebuff</strong></a> a coding agent with 6-hour free sessions daily.</li>
+            <li><a href="https://git-scm.com/"><strong>git</strong></a> one branch per member, nobody pushes to main directly.</li>
+            <li><a href="https://terax.app/"><strong>terax</strong></a> (or another terminal emulator) worth using in place of powershell.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="section__sub">guardrail skills</h3>
+          <p class="tool-note">install these globally once. the same skills work in whichever agent you land on.</p>
+          <div class="table-wrap" data-lenis-prevent-wheel>
+            <table class="skill-table">
+              <thead>
+                <tr><th>skill</th><th>when</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ponytail</strong> · forces minimal, non-overengineered code</td>
+                  <td>every phase</td>
+                </tr>
+                <tr>
+                  <td><strong>hallmark</strong> · anti-slop UI, picks structure and theme before building</td>
+                  <td>frontend build</td>
+                </tr>
+                <tr>
+                  <td><strong>impeccable</strong> · 59-rule UI audit</td>
+                  <td>frontend audit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prompt prompt--install">
+            <div class="prompt__head">
+              <span class="prompt__label">install</span>
+              <button class="copy-btn" type="button" data-copy="npx skills add DietrichGebert/ponytail&#10;npx skills add nutlope/hallmark&#10;npx impeccable install">copy</button>
+            </div>
+            <pre><code>npx skills add DietrichGebert/ponytail
+npx skills add nutlope/hallmark
+npx impeccable install</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMPLATE FILES -->
+    <section class="section" id="templates">
+      <h2 class="section__title">copy the templates, fill them in, return them.</h2>
+      <div class="section__body">
+        <p>the repo ships with template files you copy into each project, fill in, and return from:</p>
+      </div>
+      <div class="prompt prompt--install">
+        <div class="prompt__head">
+          <span class="prompt__label">context/</span>
+          <button class="copy-btn" type="button" data-copy="TEMPLATES">copy</button>
+        </div>
+        <pre><code data-id="TEMPLATES">context/
+├── readme.md
+├── idea.md
+├── spec.md
+├── plan.md
+├── phase-review.md
+└── postmortem.md</code></pre>
+      </div>
+      <div class="section__body">
+        <p>at the start of a project, copy these into your repo and fill them out. the originals stay untouched. after a project, update the originals based on what you learned. that return loop is what makes the system get smarter.</p>
+      </div>
+    </section>
+
+    <section class="section section--journey" id="journey">
+      <span class="journey__ghost" aria-hidden="true">0</span>
+      <h2 class="section__title">eight phases. copy the prompt, check the exit, move on.</h2>
+      <p class="section__lede">the whole flow, from idea to post-mortem. each phase names its tool, its file, the prompt to hand your agent, and the exit condition that says you're done.</p>
+
+      <div class="flow reveal">
+        <span>idea</span><i aria-hidden="true">→</i><span>spec</span><i aria-hidden="true">→</i><span>plan</span><i aria-hidden="true">→</i><span>repo</span><i aria-hidden="true">→</i><span>build</span><i aria-hidden="true">→</i><span>audit</span><i aria-hidden="true">→</i><span>review</span><i aria-hidden="true">→</i><span>ship</span><i aria-hidden="true">→</i><span>postmortem</span><i aria-hidden="true">↺</i><span>next</span>
+      </div>
+
+      <!-- PHASE 0 -->
+      <article class="phase reveal" id="phase-0">
+        <div class="phase__num" aria-hidden="true">0</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 0 · ideation</p>
+          <h3 class="phase__title">the idea</h3>
+          <p class="phase__meta"><strong>tool</strong> claude · <strong>file</strong> idea.md</p>
+          <p class="phase__text">upload your hackathon or project documentation and a filled idea.md, and have claude generate eight candidate ideas before you commit to one.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">prompt · claude</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_0">copy</button>
+            </div>
+            <pre><code data-id="IDEA_0">Here is the official hackathon document [attached file] and my project context:
+
+[paste filled idea.md]
+
+Generate 8 ideas. For each idea:
+- One-line concept
+- Core problem it solves
+- Who the user is
+- The single most impressive thing a judge would see in the demo
+- Realistic scope for [X] hours with [Y] team
+- Biggest technical risk
+
+After the list, recommend the top 2 based on my judging criteria and team strengths.</code></pre>
+          </div>
+          <p class="phase__text">pick one idea and sharpen it. one-sentence pitch, what the demo moment looks like, and what gets cut if time runs out. record these decisions in section 6 of idea.md as you make them.</p>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> every checkbox in the idea.md ready check is ticked. all must be yes before moving.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 1 -->
+      <article class="phase" id="phase-1">
+        <div class="phase__num" aria-hidden="true">1</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 1 · specification</p>
+          <h3 class="phase__title">the single source of truth</h3>
+          <p class="phase__meta"><strong>tool</strong> claude · <strong>file</strong> spec.md</p>
+          <p class="phase__text">turn the sharpened idea into a complete spec. this file is the contract every line of code traces back to, so be ruthless about scope.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">prompt · claude</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_1">copy</button>
+            </div>
+            <pre><code data-id="IDEA_1">Here is the spec template.
+Based on everything we've discussed about this project — the idea, the users, the constraints, and the tech choices — fill this out completely and in detail. Remove any [CONDITIONAL] sections that don't apply to this project type. Never leave a field blank; if something is genuinely not applicable, write "N/A" with a one-line reason.
+For the architecture, data flow, and acceptance criteria sections, be especially thorough — these are what the coding agent relies on most. Be ruthless about scope: if we didn't discuss it, it goes in Out of Scope, not in Must-Have.
+This file is the single source of truth. Everything the coding agent builds will trace back to it.</code></pre>
+          </div>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> every must-have feature has a testable ears-format acceptance criterion: <code>when [trigger] the system shall [behave]</code>.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 2 -->
+      <article class="phase" id="phase-2">
+        <div class="phase__num" aria-hidden="true">2</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 2 · planning</p>
+          <h3 class="phase__title">one plan per person</h3>
+          <p class="phase__meta"><strong>tool</strong> claude · <strong>file</strong> plan.md (one per member)</p>
+          <p class="phase__text">have claude divide the project across the team, then generate a full plan per member. every acceptance criterion must be testable without waiting on someone else's work.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">prompt · claude</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_2">copy</button>
+            </div>
+            <pre><code data-id="IDEA_2">Here is spec.md: [attach]
+Here is plan.md template: [attach]
+
+Generate plan.md for [role].
+
+Use the uploaded plan.md template structure as template. Pick only the phases for their scope.
+Each phase must list tasks specific to their role. Acceptance criteria must be
+independently testable, no other member's work required first.</code></pre>
+          </div>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> every member has a plan, and every acceptance criterion maps to a feature in spec.md.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 3 -->
+      <article class="phase" id="phase-3">
+        <div class="phase__num" aria-hidden="true">3</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 3 · repository setup</p>
+          <h3 class="phase__title">branches, context, and a generated rules file</h3>
+          <p class="phase__meta"><strong>tool</strong> git + opencode</p>
+          <ol class="phase__steps">
+            <li>create the repo.</li>
+            <li>create a branch per member. nobody pushes to main directly; the one exception is shared foundation work.</li>
+            <li>create the context folder in the repo root:</li>
+          </ol>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">context/</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_3">copy</button>
+            </div>
+            <pre><code data-id="IDEA_3">context/
+├── spec.md
+└── plan-[name].md    ← one per member</code></pre>
+          </div>
+          <ol class="phase__steps" start="4">
+            <li>run opencode's <code>/init</code> to auto-generate <code>AGENTS.md</code> by analyzing the directory. don't write it by hand. it then applies your summarized habits in every session.</li>
+            <li>build shared foundation work (data models, folder structure, environment setup) on main before people branch off.</li>
+          </ol>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> repo, branches, context folder, and root AGENTS.md exist; the shared foundation runs.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 4 -->
+      <article class="phase" id="phase-4">
+        <div class="phase__num" aria-hidden="true">4</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 4 · coding</p>
+          <h3 class="phase__title">every session starts the same way</h3>
+          <p class="phase__meta"><strong>tool</strong> opencode · <strong>files</strong> context folder</p>
+          <p class="phase__text">open the session by forcing the agent to read the context and confirm the plan before it writes a line of code.</p>
+
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">session start prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_4">copy</button>
+            </div>
+            <pre><code data-id="IDEA_4">Read these files before doing anything:
+- context/spec.md
+- context/plan.md
+
+Skills active this session: ponytail [+ hallmark or impeccable by phase — see table]
+
+Do not write any code yet. Confirm you have read them by summarizing:
+1. What this project does
+2. What your role is responsible for
+3. What phase we are currently on
+4. What the acceptance criteria are for this phase</code></pre>
+          </div>
+
+          <div class="table-wrap" data-lenis-prevent-wheel>
+            <table class="skill-table skill-table--narrow">
+              <thead>
+                <tr><th>phase type</th><th>skills to load</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>backend, logic, api</td><td>ponytail</td></tr>
+                <tr><td>new ui from scratch</td><td>ponytail, hallmark</td></tr>
+                <tr><td>ui audit and iteration</td><td>ponytail, impeccable</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="phase__text">then run the phase in plan mode (press <kbd>tab</kbd> in opencode to switch plan ↔ build). replace n with whatever phase you're working on based on your plan.md file.</p>
+
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">phase start prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_5">copy</button>
+            </div>
+            <pre><code data-id="IDEA_5">Implement Phase [N]: [Phase Name] from my plan.
+
+Rules:
+- Finish every task in this phase before touching a future phase
+- After every file you create or modify:
+  1. Run the test or type check for that file
+  2. Run the full suite
+  3. Report both results before touching the next file
+- Do not proceed if either check fails
+- Do not advance to Phase [N+1] until all of Phase [N] passes
+- If something falls outside the spec or plan, stop and ask. Don't invent a fix</code></pre>
+          </div>
+
+          <p class="phase__text">and if the agent loops on the same error twice or more, stop it before it burns more time.</p>
+
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">anti-loop prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_6">copy</button>
+            </div>
+            <pre><code data-id="IDEA_6">Stop fixing this. Don't modify any files.
+
+Explain in plain language:
+1. What the error actually is
+2. Why your earlier fixes failed
+3. Three ways to fix it and the trade-off of each
+
+Then wait for my decision before touching anything.</code></pre>
+          </div>
+
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> every task in the phase is done, every test and type check passes, and nothing was built that isn't in the plan.</p>
+          <p class="phase__text">for sessions past 2 hours: re-read spec.md and your plan, confirm which phase and task is next, and keep going.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 5 -->
+      <article class="phase" id="phase-5">
+        <div class="phase__num" aria-hidden="true">5</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 5 · frontend audit</p>
+          <h3 class="phase__title">two audits, one table, one fix pass</h3>
+          <p class="phase__meta"><strong>tool</strong> opencode (hallmark + impeccable)</p>
+          <p class="phase__text">after any phase that produces UI, run both audits together, merge the findings into one table, fix everything in a single pass.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">merged audit prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_7">copy</button>
+            </div>
+            <pre><code data-id="IDEA_7">Run a Hallmark audit on the project, then run an Impeccable audit too.
+
+Present a single merged table with:
+- Issue found
+- Which skill flagged it (Hallmark / Impeccable / Both)
+- Recommended fix
+
+If two skills call out the same issue, list it once as "Both".
+Single-skill flags get that skill's name.</code></pre>
+          </div>
+          <p class="phase__text">fix the "both" rows first, then judge the single-skill findings and fix everything in one pass.</p>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> all "both" rows fixed, single-skill findings judged, fixes applied in one pass.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 6 -->
+      <article class="phase" id="phase-6">
+        <div class="phase__num" aria-hidden="true">6</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 6 · phase transition review</p>
+          <h3 class="phase__title">never skip the checkpoint</h3>
+          <p class="phase__meta"><strong>tool</strong> you (human) + the agent</p>
+          <p class="phase__text">before every phase change, even under pressure, have the agent self-review its own work before you sign off.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">transition review prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_8">copy</button>
+            </div>
+            <pre><code data-id="IDEA_8">Before we move to Phase [N+1], review everything built in Phase [N].
+Don't modify any files.
+
+Report:
+1. Tasks from the plan that are incomplete or missing
+2. Hardcoded values that should be env vars
+3. Unhandled error states
+4. Tests that could false-pass
+5. Anything built that wasn't in the plan
+6. Whether every acceptance criterion in the spec is verifiably met
+
+Is this phase genuinely done, or does something need fixing first?</code></pre>
+          </div>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> the agent reports a clean pass <em>and</em> your manual check passes. sign off in phase-review.md; update the change log in spec.md if it changed.</p>
+        </div>
+      </article>
+
+      <!-- PHASE 7 -->
+      <article class="phase" id="phase-7">
+        <div class="phase__num" aria-hidden="true">7</div>
+        <div class="phase__body">
+          <p class="eyebrow">phase 7 · merging and red team</p>
+          <h3 class="phase__title">a fresh eye on everything committed</h3>
+          <p class="phase__meta"><strong>tool</strong> opencode (new session)</p>
+          <p class="phase__text">once a plan is done, get a fresh session to red-team the branch as a senior engineer before it merges.</p>
+          <div class="prompt">
+            <div class="prompt__head">
+              <span class="prompt__label">red-team review prompt</span>
+              <button class="copy-btn" type="button" data-copy="IDEA_9">copy</button>
+            </div>
+            <pre><code data-id="IDEA_9">Read the following files completely before doing anything:
+- context/spec.md
+- context/plan-[name].md
+
+Then scan the entire codebase — every file this member was responsible for.
+
+Cross-reference what exists in the codebase against every task and acceptance
+criterion in plan-[name].md. Then review as a senior engineer.
+
+Report in this exact order:
+
+1. COVERAGE — For every phase and task in plan-[name].md, state whether it is
+   fully implemented, partially implemented, or missing entirely. Be specific
+   about what is missing.
+
+2. SPEC DRIFT — Does what was built match what spec.md required? List every
+   deviation, no matter how small.
+
+3. BUGS & ERRORS — Obvious bugs, unhandled error states, missing edge cases,
+   hardcoded values that should be environment variables.
+
+4. SECURITY — Any credentials, keys, or sensitive data exposed. Any input that
+   is not validated. Any endpoint that is not protected when it should be.
+
+5. SCOPE CREEP — Anything built that does not appear in plan-[name].md or
+   spec.md. List the file and the specific addition.
+
+6. MERGE RISK — Any file, function, or data structure likely to conflict with
+   other members' branches based on PLAN-SHARED conventions and overlapping
+   scope.
+
+7. VERDICT — Is this branch ready to merge to main, or does something need
+   fixing first? List every blocking issue explicitly.
+
+Be blunt. Do not soften findings. Do not mention anything positive unless
+it is directly relevant to a finding.</code></pre>
+          </div>
+          <p class="phase__text">fix anything flagged, then merge to main. for publishing: ask your coding agent how to publish the codebase to github and how to deploy, but do the actual publish and deploy steps manually. once live, expect issues to surface even if the local code was flawless, so keep a cleanup routine: open the browser console, copy the errors, and hand them to the agent to chase every time. you can also check your deployment provider's log for errors.</p>
+          <p class="phase__exit"><span class="exit-tag">exit condition</span> every blocking issue from the red team is fixed, merged to main, and deployed.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- WHY THIS WORKS -->
+    <section class="section" id="why">
+      <h2 class="section__title">it catches ai mistakes cheaply, before they compound.</h2>
+      <ul class="fix-list">
+        <li>
+          <h3 class="section__sub">the agent didn't know what to build</h3>
+          <p>fixed by spec.md and its ears-format criteria.</p>
+        </li>
+        <li>
+          <h3 class="section__sub">the agent built the wrong thing and nobody noticed</h3>
+          <p>fixed by the phase-review prompt at every transition.</p>
+        </li>
+        <li>
+          <h3 class="section__sub">everyone's work didn't fit together</h3>
+          <p>fixed by the per-member plans.</p>
+        </li>
+      </ul>
+      <p class="section__body">most ai coding failures come from exactly these three causes. this workflow doesn't eliminate the mistakes; it catches them before they become hours of repair cost.</p>
+    </section>
+
+    <!-- SOLO PATH -->
+    <section class="section" id="solo">
+      <h2 class="section__title">just you? drop the branches, keep everything else.</h2>
+      <div class="section__body">
+        <p>work in one branch and use everything else the same. one person asks claude for spec and plan, runs the agent phase by phase with testing, audits the ui, deploys, and debugs from console logs. you become the review that the whole team flow would use.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Ft5 statement footer -->
+  <footer class="foot-stmt">
+    <p class="foot-stmt__line">write down what you're building before you build it. that one habit saves you more than everything else.</p>
+    <div class="foot-stmt__meta">
+      <span class="wordmark">agentic workflow</span>
+      <span class="foot-stmt__links">
+        <a class="muted" href="resources.html">resources</a>
+        <a class="muted" href="https://github.com/HyperZx2O/agentic-development-workflow" target="_blank" rel="noopener">source · the repository</a>
+      </span>
+      <span class="muted">© 2026 · open source</span>
+    </div>
+  </footer>
+
+  <!-- copy toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">copied to clipboard</div>
+
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js" integrity="sha384-ClD7pCgIUz5M81HT8aZmMxCsWmfsycmBiwL5gy1pUbdWHvICIbea22N9sTtAFotA" crossorigin="anonymous"></script>
+  <script src="liquid-glass.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
