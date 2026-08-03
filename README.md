@@ -2,6 +2,8 @@ Hello there. I am just a Computer Science Fresher starting out my journey into b
 
 Basically I studied some youtube videos, got the gist of developing projects using coding agents, then thought why not polish my basic workflow? So I sat down with Claude, discussed and debated with it and finally made a foundation for my workflow. And I love sharing my guides so here you go. Also I will share the resources worth mentioning in the relevant section.
 
+This workflow has been reviewed against a handful of international benchmarks - GitHub Spec Kit, AWS Kiro, BMAD Method, Universal Dev Standards, Augment Code's SDD guide, the DEV Community's 2026 SDD field guide, and a few others.
+
 ---
 
 A structured, prompt-driven system for AI-assisted hackathon and software development. Built for small teams who want the discipline of a big engineering team without the overhead. Both the spec and the quickstart are merged here into one workflow.
@@ -10,15 +12,34 @@ A structured, prompt-driven system for AI-assisted hackathon and software develo
 
 ---
 
+## Table of Contents
+
+- [Resources](#resources)
+- [What This Is](#what-this-is)
+- [What You Need](#what-you-need)
+  - [Tools](#tools)
+  - [CLI and Skills Setup](#cli-and-skills-setup)
+  - [Template Files](#template-files)
+- [The Workflow, at a Glance](#the-workflow-at-a-glance)
+- [Phase 0: Ideation](#phase-0-ideation)
+- [Phase 1: Specification](#phase-1-specification)
+- [Phase 2: Planning](#phase-2-planning)
+- [Phase 3: Repository Setup](#phase-3-repository-setup)
+- [Phase 4: Coding](#phase-4-coding)
+- [Phase 5: Frontend Audit](#phase-5-frontend-audit)
+- [Phase 6: Phase Transition Review](#phase-6-phase-transition-review)
+- [Phase 7: Merging and Red Team](#phase-7-merging-and-red-team)
+- [Why This Works](#why-this-works)
+- [Solo Path](#solo-path)
+
+---
+
 ## Resources
 
-<div style="display: flex; gap: 16px; flex-wrap: wrap;">
-
-<a href="https://youtube.com/playlist?list=PLkD4ksZgZ-nrX6kCvfoCHJr3GyFRnbab3&si=D12eZtiTOfzjlIZM"><img src="https://i.imgur.com/zFQakbx.jpeg" alt="Hackathon video playlist" width="300" height="200"></a>
-
-<a href="https://chaotech.in/h2h"><img src="https://i.imgur.com/LT1dwIK.png" alt="H2H guide" width="300" height="200"></a>
-
-</div>
+| Guide | What it is |
+|-------|------------|
+| [Hackathon video playlist](https://youtube.com/playlist?list=PLkD4ksZgZ-nrX6kCvfoCHJr3GyFRnbab3&si=D12eZtiTOfzjlIZM) | Video walkthrough of this workflow |
+| [H2H guide](https://chaotech.in/h2h) | Hacking-to-Hackathon companion guide |
 
 ---
 
@@ -77,8 +98,35 @@ At the start of a project, copy these into your repo and fill them out. The orig
 
 The whole flow, from idea to post-mortem:
 
-```
-idea.md → spec.md → plan.md (per member) → repo setup → coding → frontend audit → phase review → red team + merge → postmortem.md
+```mermaid
+flowchart LR
+    subgraph Idea[Claude - Ideation]
+        A[Phase 0: Ideation<br/>idea.md]
+        B[Phase 1: Specification<br/>spec.md]
+        C[Phase 2: Planning<br/>plan-&#91;name&#93;.md]
+    end
+
+    subgraph Setup[Git + OpenCode - Repo]
+        D[Phase 3: Repo Setup<br/>AGENTS.md, branches]
+    end
+
+    subgraph Build[OpenCode - Building]
+        E[Phase 4: Coding]
+        F{Phase 5: Frontend Audit}
+        G[Phase 6: Phase Review]
+    end
+
+    subgraph Ship[Human + Agent - Delivery]
+        H[Phase 7: Red Team + Merge]
+        I[Postmortem<br/>postmortem.md]
+    end
+
+    A --> B --> C --> D --> E
+    E --> F --> G
+    G -->|next phase| E
+    G -->|done| H
+    H --> I
+    I -.->|return loop| A
 ```
 
 ---
