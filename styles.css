@@ -465,6 +465,37 @@ a:focus-visible, button:focus-visible {
 .skill-table tbody tr:last-child td { border-bottom: none; }
 .skill-table td:last-child { color: var(--color-muted); font-family: var(--font-mono); font-size: 0.8rem; }
 
+/* ============ PROOF ============ */
+.proof-score { color: var(--color-accent); font-family: var(--font-mono); font-weight: 500; }
+.proof-wrap { margin-top: var(--space-md); }
+.proof-label {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: var(--tracking-micro); text-transform: uppercase;
+  color: var(--color-muted);
+  margin: var(--space-lg) 0 var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+.proof-table thead th { border-bottom: var(--rule-hair) solid var(--color-rule-2); }
+.proof-table tbody td { border-bottom: var(--rule-hair) solid var(--color-rule); }
+.proof-table tbody tr:last-child td { border-bottom: none; }
+.proof-scorecard thead th:nth-child(n+2),
+.proof-scorecard td:nth-child(n+2) { text-align: right; font-family: var(--font-mono); }
+.proof-table .proof-weighted,
+.proof-table td.proof-weighted,
+.proof-table .proof-overall .proof-weighted { color: var(--color-accent); }
+.proof-table .proof-overall th,
+.proof-table .proof-overall td {
+  border-top: var(--rule-hair) solid var(--color-rule-2);
+  color: var(--color-ink); font-weight: 600;
+}
+.proof-table .proof-overall .proof-weighted { font-weight: 500; }
+.proof-bench td:nth-child(2) { color: var(--color-muted); }
+.proof-bench a { color: var(--color-ink); }
+.proof-bench a:hover { color: var(--color-accent); }
+.proof-bench .proof-source { color: var(--color-muted); font-size: 0.75rem; }
+.proof-bench .proof-source:hover { color: var(--color-accent); }
+
 /* ============ PROMPT CARDS ============ */
 .prompt {
   position: relative;
