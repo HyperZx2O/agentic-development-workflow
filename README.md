@@ -99,33 +99,16 @@ At the start of a project, copy these into your repo and fill them out. The orig
 The whole flow, from idea to post-mortem:
 
 ```mermaid
-flowchart LR
-    subgraph Idea[Claude - Ideation]
-        A[Phase 0: Ideation<br/>idea.md]
-        B[Phase 1: Specification<br/>spec.md]
-        C[Phase 2: Planning<br/>plan-&#91;name&#93;.md]
-    end
-
-    subgraph Setup[Git + OpenCode - Repo]
-        D[Phase 3: Repo Setup<br/>AGENTS.md, branches]
-    end
-
-    subgraph Build[OpenCode - Building]
-        E[Phase 4: Coding]
-        F{Phase 5: Frontend Audit}
-        G[Phase 6: Phase Review]
-    end
-
-    subgraph Ship[Human + Agent - Delivery]
-        H[Phase 7: Red Team + Merge]
-        I[Postmortem<br/>postmortem.md]
-    end
-
-    A --> B --> C --> D --> E
-    E --> F --> G
+flowchart TB
+    A[Phase 0: Ideation<br/>idea.md] --> B[Phase 1: Specification<br/>spec.md]
+    B --> C[Phase 2: Planning<br/>plan-&#91;name&#93;.md]
+    C --> D[Phase 3: Repo Setup<br/>AGENTS.md, branches]
+    D --> E[Phase 4: Coding]
+    E --> F{Phase 5: Frontend Audit}
+    F --> G[Phase 6: Phase Review]
     G -->|next phase| E
-    G -->|done| H
-    H --> I
+    G -->|done| H[Phase 7: Red Team + Merge]
+    H --> I[Postmortem<br/>postmortem.md]
     I -.->|return loop| A
 ```
 
