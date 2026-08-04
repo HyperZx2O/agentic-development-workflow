@@ -43,6 +43,11 @@
     </header>
 
     <section class="res-list" id="resources" aria-label="resource library">
+      <div class="res-search" role="search">
+        <label class="res-search__label" for="resSearch">filter the library</label>
+        <input class="res-search__input" id="resSearch" type="search" placeholder="titles, authors, topics…" autocomplete="off" spellcheck="false">
+        <span class="res-search__count" id="resCount">11 of 11</span>
+      </div>
       <ol class="res-list__ol">
         <li class="res-row res-row--link reveal">
           <a class="res-row__anchor" href="https://www.youtube.com/playlist?list=PLkD4ksZgZ-nrX6kCvfoCHJr3GyFRnbab3" target="_blank" rel="noopener">
@@ -155,6 +160,7 @@
           </a>
         </li>
       </ol>
+      <p class="res-none" id="resNone" hidden>no matches — try another word.</p>
     </section>
   </main>
 
@@ -169,6 +175,12 @@
       <span class="muted">© 2026 · open source</span>
     </div>
   </footer>
+
+  <!-- hover preview (fine pointers only, filled by app.js) -->
+  <div class="res-preview" id="resPreview" aria-hidden="true"></div>
+
+  <!-- scroll to top -->
+  <button class="scroll-top" id="scrollTop" type="button" aria-label="back to top">↑</button>
 
   <!-- lucide icon sprite (ISC) -->
   <svg class="res-sprite" aria-hidden="true" focusable="false">

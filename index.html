@@ -44,7 +44,7 @@
       <span class="phase-menu__label">phases</span>
       <span class="phase-menu__caret" aria-hidden="true">▾</span>
     </button>
-    <div class="phase-menu__panel" id="phaseMenu" aria-label="phases" data-lenis-prevent-wheel>
+    <div class="phase-menu__panel" id="phaseMenu" aria-label="phases" data-lenis-prevent>
       <a class="phase-menu__item" href="#phase-0" data-phase="0"><span class="phase-menu__num" aria-hidden="true">0</span><span class="phase-menu__title">the idea</span></a>
       <a class="phase-menu__item" href="#phase-1" data-phase="1"><span class="phase-menu__num" aria-hidden="true">1</span><span class="phase-menu__title">the single source of truth</span></a>
       <a class="phase-menu__item" href="#phase-2" data-phase="2"><span class="phase-menu__num" aria-hidden="true">2</span><span class="phase-menu__title">one plan per person</span></a>
@@ -102,15 +102,15 @@
     <!-- STATS -->
     <section class="stats" aria-label="workflow at a glance">
       <div class="stat">
-        <span class="stat__num">8</span>
+        <span class="stat__num" data-num="8">8</span>
         <span class="stat__label">phases</span>
       </div>
       <div class="stat">
-        <span class="stat__num">9</span>
+        <span class="stat__num" data-num="9">9</span>
         <span class="stat__label">copyable prompts</span>
       </div>
       <div class="stat">
-        <span class="stat__num">3</span>
+        <span class="stat__num" data-num="3">3</span>
         <span class="stat__label">guardrail skills</span>
       </div>
     </section>
@@ -143,7 +143,7 @@
         <div>
           <h3 class="section__sub">guardrail skills</h3>
           <p class="tool-note">install these globally once. the same skills work in whichever agent you land on.</p>
-          <div class="table-wrap" data-lenis-prevent-wheel>
+          <div class="table-wrap">
             <table class="skill-table">
               <thead>
                 <tr><th>skill</th><th>when</th></tr>
@@ -183,7 +183,7 @@ npx impeccable install</code></pre>
       <div class="section__body">
         <p>the repo ships with template files you copy into each project, fill in, and return from:</p>
       </div>
-      <div class="prompt prompt--install">
+      <div class="prompt prompt--install prompt--tree">
         <div class="prompt__head">
           <span class="prompt__label">context/</span>
           <button class="copy-btn" type="button" data-copy="TEMPLATES">copy</button>
@@ -206,8 +206,28 @@ npx impeccable install</code></pre>
       <h2 class="section__title">eight phases. copy the prompt, check the exit, move on.</h2>
       <p class="section__lede">the whole flow, from idea to post-mortem. each phase names its tool, its file, the prompt to hand your agent, and the exit condition that says you're done.</p>
 
+      <!-- ponytail: 8 step anchors; active state synced by the phase-menu observer -->
+      <nav class="step-progress reveal" aria-label="phase progress">
+        <a class="step-progress__step" href="#phase-0"><span>0</span></a>
+        <a class="step-progress__step" href="#phase-1"><span>1</span></a>
+        <a class="step-progress__step" href="#phase-2"><span>2</span></a>
+        <a class="step-progress__step" href="#phase-3"><span>3</span></a>
+        <a class="step-progress__step" href="#phase-4"><span>4</span></a>
+        <a class="step-progress__step" href="#phase-5"><span>5</span></a>
+        <a class="step-progress__step" href="#phase-6"><span>6</span></a>
+        <a class="step-progress__step" href="#phase-7"><span>7</span></a>
+      </nav>
+
+      <!-- ponytail: one duplicated set, CSS translateX(-50%) loop — seamless, no JS -->
       <div class="flow reveal">
-        <span>idea</span><i aria-hidden="true">→</i><span>spec</span><i aria-hidden="true">→</i><span>plan</span><i aria-hidden="true">→</i><span>repo</span><i aria-hidden="true">→</i><span>build</span><i aria-hidden="true">→</i><span>audit</span><i aria-hidden="true">→</i><span>review</span><i aria-hidden="true">→</i><span>ship</span><i aria-hidden="true">→</i><span>postmortem</span><i aria-hidden="true">↺</i><span>next</span>
+        <div class="flow__track">
+          <div class="flow__set">
+            <span>idea</span><i aria-hidden="true">→</i><span>spec</span><i aria-hidden="true">→</i><span>plan</span><i aria-hidden="true">→</i><span>repo</span><i aria-hidden="true">→</i><span>build</span><i aria-hidden="true">→</i><span>audit</span><i aria-hidden="true">→</i><span>review</span><i aria-hidden="true">→</i><span>ship</span><i aria-hidden="true">→</i><span>postmortem</span><i aria-hidden="true">↺</i><span>next</span>
+          </div>
+          <div class="flow__set" aria-hidden="true">
+            <span>idea</span><i aria-hidden="true">→</i><span>spec</span><i aria-hidden="true">→</i><span>plan</span><i aria-hidden="true">→</i><span>repo</span><i aria-hidden="true">→</i><span>build</span><i aria-hidden="true">→</i><span>audit</span><i aria-hidden="true">→</i><span>review</span><i aria-hidden="true">→</i><span>ship</span><i aria-hidden="true">→</i><span>postmortem</span><i aria-hidden="true">↺</i><span>next</span>
+          </div>
+        </div>
       </div>
 
       <!-- PHASE 0 -->
@@ -302,7 +322,7 @@ independently testable, no other member's work required first.</code></pre>
             <li>create a branch per member. nobody pushes to main directly; the one exception is shared foundation work.</li>
             <li>create the context folder in the repo root:</li>
           </ol>
-          <div class="prompt">
+          <div class="prompt prompt--tree">
             <div class="prompt__head">
               <span class="prompt__label">context/</span>
               <button class="copy-btn" type="button" data-copy="IDEA_3">copy</button>
@@ -346,7 +366,7 @@ Do not write any code yet. Confirm you have read them by summarizing:
 4. What the acceptance criteria are for this phase</code></pre>
           </div>
 
-          <div class="table-wrap" data-lenis-prevent-wheel>
+          <div class="table-wrap">
             <table class="skill-table skill-table--narrow">
               <thead>
                 <tr><th>phase type</th><th>skills to load</th></tr>
@@ -538,8 +558,11 @@ it is directly relevant to a finding.</code></pre>
     <!-- PROOF · BENCHMARKS -->
     <section class="section" id="proof">
       <h2 class="section__title">scored against the field.</h2>
-      <p class="section__lede">evaluated against 12 industry standards and scored on 9 dimensions — <strong class="proof-score">8.34 / 10</strong> overall.</p>
-      <div class="table-wrap proof-wrap reveal" data-lenis-prevent-wheel>
+      <p class="section__lede">evaluated against 12 industry standards and scored on 9 dimensions — <strong class="proof-score">8.34 / 10</strong> <span class="stars" aria-hidden="true"><span class="stars__bg">★★★★★</span><span class="stars__fill" style="width: 83.4%">★★★★★</span></span> overall.</p>
+      <figure class="proof-chart" aria-label="radar chart of the nine dimension scores">
+        <svg id="radarChart" viewBox="0 0 320 320" role="img" aria-hidden="true"></svg>
+      </figure>
+      <div class="table-wrap proof-wrap reveal">
         <table class="skill-table proof-table proof-scorecard">
           <thead>
             <tr><th scope="col">dimension</th><th scope="col">weight</th><th scope="col">score</th><th scope="col">weighted</th></tr>
@@ -561,7 +584,8 @@ it is directly relevant to a finding.</code></pre>
         </table>
       </div>
       <p class="proof-label">benchmarked against</p>
-      <div class="table-wrap proof-wrap reveal" data-lenis-prevent-wheel>
+      <div class="logo-cloud" id="logoCloud" aria-label="benchmarked standards"></div>
+      <div class="table-wrap proof-wrap reveal">
         <table class="skill-table proof-table proof-bench">
           <thead>
             <tr><th scope="col">standard</th><th scope="col">type</th><th scope="col">source</th></tr>
@@ -609,6 +633,9 @@ it is directly relevant to a finding.</code></pre>
 
   <!-- copy toast -->
   <div class="toast" id="toast" role="status" aria-live="polite">copied to clipboard</div>
+
+  <!-- scroll to top -->
+  <button class="scroll-top" id="scrollTop" type="button" aria-label="back to top">↑</button>
 
   <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js" integrity="sha384-ClD7pCgIUz5M81HT8aZmMxCsWmfsycmBiwL5gy1pUbdWHvICIbea22N9sTtAFotA" crossorigin="anonymous"></script>
   <script src="liquid-glass.js"></script>
