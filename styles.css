@@ -841,6 +841,8 @@ a:focus-visible, button:focus-visible {
   .nav-pill { left: var(--space-md); transform: none; flex-wrap: wrap; justify-content: flex-start; max-width: calc(100vw - 7.5rem); }
   .nav-pill__links { flex-wrap: wrap; gap: var(--space-xs); }
   .nav-pill__links a { padding: 0.45rem 0.6rem; }
+  /* ponytail: mobile keeps only the wordmark + the last link ("resources"); hide the section links */
+  .nav-pill__links li:not(:last-child) { display: none; }
   /* ponytail: CTA hidden on mobile — GitHub link lives in the footer */
   .cta-fill { display: none; }
   /* ponytail: stepper hidden on mobile — the phase-menu dropdown already jumps */
