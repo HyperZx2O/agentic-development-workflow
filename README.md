@@ -14,7 +14,6 @@ A structured, prompt-driven system for AI-assisted hackathon and software develo
 
 ## Table of Contents
 
-- [Resources](#resources)
 - [What This Is](#what-this-is)
 - [What You Need](#what-you-need)
   - [Tools](#tools)
@@ -34,14 +33,6 @@ A structured, prompt-driven system for AI-assisted hackathon and software develo
 
 ---
 
-## Resources
-
-| Guide | What it is |
-|-------|------------|
-| [Hackathon video playlist](https://youtube.com/playlist?list=PLkD4ksZgZ-nrX6kCvfoCHJr3GyFRnbab3&si=D12eZtiTOfzjlIZM) | Video walkthrough of this workflow |
-| [H2H guide](https://chaotech.in/h2h) | Hacking-to-Hackathon companion guide |
-
----
 
 ## What This Is
 
