@@ -16,7 +16,7 @@ Confident, technical, slightly nocturnal. "The discipline of a big engineering t
 
 ## Register
 
-brand — the design *is* the product here. The site's visual craft is part of the teaching.
+brand. The design *is* the product here. The site's visual craft is part of the teaching.
 
 ## Anti-references
 

@@ -1,6 +1,6 @@
 # Project Specification
-<!-- TEMPLATE VERSION: 2.0 — filled by Claude, not by hand -->
-<!-- AGENT INSTRUCTION: Sections marked [CONDITIONAL] are included only when relevant to the project type. Remove the tag and the section if it does not apply. Never leave a field blank — write "N/A" with a one-line reason if truly not applicable. -->
+<!-- TEMPLATE VERSION: 2.0, filled by Claude, not by hand -->
+<!-- AGENT INSTRUCTION: Sections marked [CONDITIONAL] are included only when relevant to the project type. Remove the tag and the section if it does not apply. Never leave a field blank; write "N/A" with a one-line reason if truly not applicable. -->
 
 ---
 
@@ -13,7 +13,7 @@
 | **Project Type** | `web-app` / `cli` / `api` / `ml-pipeline` / `mobile` / `browser-ext` / `library` / `other:___` |
 | **Hackathon / Context** | Name of competition, course, or personal project |
 | **Deadline** | ISO date (YYYY-MM-DD) + hours remaining at spec creation |
-| **Team Size** | N people + roles (e.g., "3 — 1 frontend, 1 backend, 1 ML") |
+| **Team Size** | N people + roles (e.g., "3: 1 frontend, 1 backend, 1 ML") |
 | **Primary Language(s)** | |
 
 ---
@@ -38,9 +38,9 @@
 
 ## 4. Core Features
 
-### Must-Have (MVP — project fails without these)
+### Must-Have (MVP: project fails without these)
 
-- [ ] **Feature 1** — one sentence. Include the user type it serves.
+- [ ] **Feature 1**: one sentence. Include the user type it serves.
 - [ ] **Feature 2**
 - [ ] **Feature 3**
 
@@ -70,7 +70,7 @@
 | Key APIs / SDKs | | | |
 | Dev Tooling | | | |
 
-<!-- [CONDITIONAL — ML projects only] -->
+<!-- [CONDITIONAL: ML projects only] -->
 ## 5a. Model Card
 
 | Field | Value |
@@ -96,9 +96,9 @@
 
 <!-- List the 3–6 core objects/tables/schemas the system revolves around. One line each. -->
 
-- `EntityName` — what it represents, key fields
+- `EntityName`: what it represents, key fields
 
-### [CONDITIONAL — API / backend projects]
+### [CONDITIONAL: API / backend projects]
 
 **Endpoints (high-level):**
 
@@ -116,7 +116,7 @@
 | **External dependencies** | List each + fallback if it goes down |
 | **Data stored** | What is persisted |
 | **Data never stored** | PII, secrets, etc. |
-| **Authentication** | None / JWT / OAuth / API key / session — specify which |
+| **Authentication** | None / JWT / OAuth / API key / session: specify which |
 | **Rate limits / quotas** | Any API or compute ceiling that affects the design |
 
 ---
@@ -130,7 +130,7 @@
 | Time budget | X hours / days | |
 | Compute / infra budget | Free tier / $X | |
 | Team skill ceiling | e.g., "no iOS experience" | |
-| Dataset size / availability | [CONDITIONAL — ML] | |
+| Dataset size / availability | [CONDITIONAL: ML] | |
 | Latency requirement | e.g., "<2s response" | |
 
 ---
@@ -171,13 +171,13 @@
 
 ```
 project-root/
-├── src/                  # or app/ — all source code
+├── src/                  # or app/, all source code
 │   ├── module-a/
 │   └── module-b/
 ├── tests/                # mirrors src/ structure
-├── data/                 # [CONDITIONAL — ML] raw/, processed/, outputs/
-├── notebooks/            # [CONDITIONAL — ML] exploration only, not imported by src/
-├── public/               # [CONDITIONAL — web] static assets
+├── data/                 # [CONDITIONAL: ML] raw/, processed/, outputs/
+├── notebooks/            # [CONDITIONAL: ML] exploration only, not imported by src/
+├── public/               # [CONDITIONAL: web] static assets
 ├── docs/                 # spec.md lives here; any other reference docs
 ├── .env.example          # committed; .env is not
 ├── README.md
@@ -185,7 +185,7 @@ project-root/
 ```
 
 **Naming conventions:**
-- Files: `kebab-case` / `snake_case` — pick one, state it here
+- Files: `kebab-case` / `snake_case`: pick one, state it here
 - Components / Classes: `PascalCase`
 - Constants: `UPPER_SNAKE_CASE`
 
@@ -194,8 +194,8 @@ project-root/
 ## 12. Change Log
 
 <!-- Update every time the spec changes after coding has started. -->
-<!-- Before any new phase, check this log — if a change affects the plan, update the plan first. -->
+<!-- Before any new phase, check this log: if a change affects the plan, update the plan first. -->
 
 | Version | Date | What Changed | Why | Affected Plans |
 |---------|------|-------------|-----|----------------|
-| v1.0 | YYYY-MM-DD | Initial spec | — | All |
+| v1.0 | YYYY-MM-DD | Initial spec | n/a | All |

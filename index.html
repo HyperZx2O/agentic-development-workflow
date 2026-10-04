@@ -127,15 +127,14 @@
 
     <!-- TOOLS -->
     <section class="section" id="tools">
-      <h2 class="section__title">six tools and three skills.</h2>
+      <h2 class="section__title">seven tools and three skills.</h2>
       <div class="tooling">
         <div>
           <h3 class="section__sub">tools</h3>
           <ul class="tool-list">
             <li><a href="https://claude.ai/"><strong>claude</strong></a> for ideation and plan generation.</li>
             <li><a href="https://opencode.ai/"><strong>opencode</strong></a> your local agent that reads your directory and writes code.</li>
-            <li><a href="https://mimo.xiaomi.com/coder"><strong>mimo code</strong></a> an opencode clone with mimo models.</li>
-            <li><a href="https://freebuff.com/"><strong>freebuff</strong></a> a coding agent with 6-hour free sessions daily.</li>
+            <li>or any other coding agent · <a href="https://freebuff.com/"><strong>freebuff</strong></a> for 6-hour free sessions daily, <a href="https://cline.bot/"><strong>cline</strong></a>, or <a href="https://antigravity.google/product/antigravity-cli"><strong>antigravity cli</strong></a>. swap one in when your opencode quota runs out rather than stopping.</li>
             <li><a href="https://git-scm.com/"><strong>git</strong></a> one branch per member, nobody pushes to main directly.</li>
             <li><a href="https://terax.app/"><strong>terax</strong></a> (or another terminal emulator) worth using in place of powershell.</li>
           </ul>
@@ -218,7 +217,7 @@ npx impeccable install</code></pre>
         <a class="step-progress__step" href="#phase-7"><span>7</span></a>
       </nav>
 
-      <!-- ponytail: one duplicated set, CSS translateX(-50%) loop — seamless, no JS -->
+      <!-- ponytail: one duplicated set, CSS translateX(-50%) loop, seamless, no JS -->
       <div class="flow reveal">
         <div class="flow__track">
           <div class="flow__set">
@@ -276,8 +275,8 @@ After the list, recommend the top 2 based on my judging criteria and team streng
               <button class="copy-btn" type="button" data-copy="IDEA_1">copy</button>
             </div>
             <pre><code data-id="IDEA_1">Here is the spec template.
-Based on everything we've discussed about this project — the idea, the users, the constraints, and the tech choices — fill this out completely and in detail. Remove any [CONDITIONAL] sections that don't apply to this project type. Never leave a field blank; if something is genuinely not applicable, write "N/A" with a one-line reason.
-For the architecture, data flow, and acceptance criteria sections, be especially thorough — these are what the coding agent relies on most. Be ruthless about scope: if we didn't discuss it, it goes in Out of Scope, not in Must-Have.
+Based on everything we've discussed about this project (the idea, the users, the constraints, and the tech choices), fill this out completely and in detail. Remove any [CONDITIONAL] sections that don't apply to this project type. Never leave a field blank; if something is genuinely not applicable, write "N/A" with a one-line reason.
+For the architecture, data flow, and acceptance criteria sections, be especially thorough. These are what the coding agent relies on most. Be ruthless about scope: if we didn't discuss it, it goes in Out of Scope, not in Must-Have.
 This file is the single source of truth. Everything the coding agent builds will trace back to it.</code></pre>
           </div>
           <p class="phase__exit"><span class="exit-tag">exit condition</span> every must-have feature has a testable ears-format acceptance criterion: <code>when [trigger] the system shall [behave]</code>.</p>
@@ -357,7 +356,7 @@ independently testable, no other member's work required first.</code></pre>
 - context/spec.md
 - context/plan.md
 
-Skills active this session: ponytail [+ hallmark or impeccable by phase — see table]
+Skills active this session: ponytail [+ hallmark or impeccable by phase, see table]
 
 Do not write any code yet. Confirm you have read them by summarizing:
 1. What this project does
@@ -496,34 +495,34 @@ Is this phase genuinely done, or does something need fixing first?</code></pre>
 - context/spec.md
 - context/plan-[name].md
 
-Then scan the entire codebase — every file this member was responsible for.
+Then scan the entire codebase: every file this member was responsible for.
 
 Cross-reference what exists in the codebase against every task and acceptance
 criterion in plan-[name].md. Then review as a senior engineer.
 
 Report in this exact order:
 
-1. COVERAGE — For every phase and task in plan-[name].md, state whether it is
+1. COVERAGE: For every phase and task in plan-[name].md, state whether it is
    fully implemented, partially implemented, or missing entirely. Be specific
    about what is missing.
 
-2. SPEC DRIFT — Does what was built match what spec.md required? List every
+2. SPEC DRIFT: Does what was built match what spec.md required? List every
    deviation, no matter how small.
 
-3. BUGS & ERRORS — Obvious bugs, unhandled error states, missing edge cases,
+3. BUGS & ERRORS: Obvious bugs, unhandled error states, missing edge cases,
    hardcoded values that should be environment variables.
 
-4. SECURITY — Any credentials, keys, or sensitive data exposed. Any input that
+4. SECURITY: Any credentials, keys, or sensitive data exposed. Any input that
    is not validated. Any endpoint that is not protected when it should be.
 
-5. SCOPE CREEP — Anything built that does not appear in plan-[name].md or
+5. SCOPE CREEP: Anything built that does not appear in plan-[name].md or
    spec.md. List the file and the specific addition.
 
-6. MERGE RISK — Any file, function, or data structure likely to conflict with
+6. MERGE RISK: Any file, function, or data structure likely to conflict with
    other members' branches based on PLAN-SHARED conventions and overlapping
    scope.
 
-7. VERDICT — Is this branch ready to merge to main, or does something need
+7. VERDICT: Is this branch ready to merge to main, or does something need
    fixing first? List every blocking issue explicitly.
 
 Be blunt. Do not soften findings. Do not mention anything positive unless
@@ -558,7 +557,7 @@ it is directly relevant to a finding.</code></pre>
     <!-- PROOF · BENCHMARKS -->
     <section class="section" id="proof">
       <h2 class="section__title">scored against the field.</h2>
-      <p class="section__lede">evaluated against 12 industry standards and scored on 9 dimensions — <strong class="proof-score">8.34 / 10</strong> <span class="stars" aria-hidden="true"><span class="stars__bg">★★★★★</span><span class="stars__fill" style="width: 83.4%">★★★★★</span></span> overall.</p>
+      <p class="section__lede">evaluated against 12 industry standards and scored on 9 dimensions: <strong class="proof-score">8.34 / 10</strong> <span class="stars" aria-hidden="true"><span class="stars__bg">★★★★★</span><span class="stars__fill" style="width: 83.4%">★★★★★</span></span> overall.</p>
       <figure class="proof-chart" aria-label="radar chart of the nine dimension scores">
         <svg id="radarChart" viewBox="0 0 320 320" role="img" aria-hidden="true"></svg>
       </figure>
@@ -579,7 +578,7 @@ it is directly relevant to a finding.</code></pre>
             <tr><td>documentation &amp; knowledge transfer</td><td>6%</td><td>8.5</td><td class="proof-weighted">0.51</td></tr>
           </tbody>
           <tfoot>
-            <tr class="proof-overall"><th scope="row">overall</th><td>—</td><td>—</td><td class="proof-weighted">8.34 / 10</td></tr>
+            <tr class="proof-overall"><th scope="row">overall</th><td>n/a</td><td>n/a</td><td class="proof-weighted">8.34 / 10</td></tr>
           </tfoot>
         </table>
       </div>
@@ -594,7 +593,7 @@ it is directly relevant to a finding.</code></pre>
             <tr><td><a href="https://github.github.com/spec-kit" target="_blank" rel="noopener"><strong>github spec kit</strong></a></td><td>open-source framework, de facto sdd reference</td><td><a class="proof-source" href="https://github.github.com/spec-kit" target="_blank" rel="noopener">github.github.com/spec-kit</a></td></tr>
             <tr><td><a href="https://aws.amazon.com/kiro" target="_blank" rel="noopener"><strong>aws kiro</strong></a></td><td>enterprise agentic ide, ga 2026</td><td><a class="proof-source" href="https://aws.amazon.com/kiro" target="_blank" rel="noopener">aws.amazon.com/kiro</a></td></tr>
             <tr><td><a href="https://augmentcode.com/guides/bmad-method" target="_blank" rel="noopener"><strong>bmad method</strong></a></td><td>agentic delivery methodology, 49k+ stars</td><td><a class="proof-source" href="https://augmentcode.com/guides/bmad-method" target="_blank" rel="noopener">augmentcode.com/guides/bmad-method</a></td></tr>
-            <tr><td><a href="https://arxiv.org/abs/2605.05400" target="_blank" rel="noopener"><strong>mep — arXiv:2605.05400</strong></a></td><td>peer-reviewed paper, vibe x 2026, acm sigsoft</td><td><a class="proof-source" href="https://arxiv.org/abs/2605.05400" target="_blank" rel="noopener">arxiv.org/abs/2605.05400</a></td></tr>
+            <tr><td><a href="https://arxiv.org/abs/2605.05400" target="_blank" rel="noopener"><strong>mep: arXiv:2605.05400</strong></a></td><td>peer-reviewed paper, vibe x 2026, acm sigsoft</td><td><a class="proof-source" href="https://arxiv.org/abs/2605.05400" target="_blank" rel="noopener">arxiv.org/abs/2605.05400</a></td></tr>
             <tr><td><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener"><strong>superpowers framework</strong></a></td><td>agentic skills framework, 224.7k stars</td><td><a class="proof-source" href="https://github.com/obra/superpowers" target="_blank" rel="noopener">github.com/obra/superpowers</a></td></tr>
             <tr><td><a href="https://github.com/AsiaOstrich/universal-dev-standards" target="_blank" rel="noopener"><strong>universal dev standards v2.3.0</strong></a></td><td>language-agnostic sdd standards, updated june 2026</td><td><a class="proof-source" href="https://github.com/AsiaOstrich/universal-dev-standards" target="_blank" rel="noopener">github.com/AsiaOstrich/universal-dev-standards</a></td></tr>
             <tr><td><a href="https://augmentcode.com/guides/what-is-spec-driven-development" target="_blank" rel="noopener"><strong>augment code sdd guide</strong></a></td><td>industry practitioner field guide</td><td><a class="proof-source" href="https://augmentcode.com/guides/what-is-spec-driven-development" target="_blank" rel="noopener">augmentcode.com/guides/what-is-spec-driven-development</a></td></tr>
@@ -602,7 +601,7 @@ it is directly relevant to a finding.</code></pre>
             <tr><td><a href="https://thebcms.com/blog/spec-driven-development" target="_blank" rel="noopener"><strong>thebcms.com sdd guide</strong></a></td><td>comprehensive tooling comparison</td><td><a class="proof-source" href="https://thebcms.com/blog/spec-driven-development" target="_blank" rel="noopener">thebcms.com/blog/spec-driven-development</a></td></tr>
             <tr><td><a href="https://promptengineering.org" target="_blank" rel="noopener"><strong>agents at work 2026 playbook</strong></a></td><td>practitioner reliability guide</td><td><a class="proof-source" href="https://promptengineering.org" target="_blank" rel="noopener">promptengineering.org</a></td></tr>
             <tr><td><strong>deloitte state of ai 2026</strong></td><td>enterprise ai governance research</td><td class="proof-source">cited in the augment code sdd guide</td></tr>
-            <tr><td><a href="https://conf.researchr.org/home/specops-2026" target="_blank" rel="noopener"><strong>specops 2026 — issta/splash</strong></a></td><td>academic workshop on specification-driven lifecycle</td><td><a class="proof-source" href="https://conf.researchr.org/home/specops-2026" target="_blank" rel="noopener">conf.researchr.org/home/specops-2026</a></td></tr>
+            <tr><td><a href="https://conf.researchr.org/home/specops-2026" target="_blank" rel="noopener"><strong>specops 2026: issta/splash</strong></a></td><td>academic workshop on specification-driven lifecycle</td><td><a class="proof-source" href="https://conf.researchr.org/home/specops-2026" target="_blank" rel="noopener">conf.researchr.org/home/specops-2026</a></td></tr>
           </tbody>
         </table>
       </div>

@@ -1,0 +1,54 @@
+# Static site: plain HTML/CSS/JS served by GitHub Pages. No build step, no bundler,
+# no node_modules. This file only covers local noise and the files below.
+
+
+# ---- OS ----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+# ---- Editors ----
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+
+# ---- Secrets and local config ----
+# Nothing secret ships in this repo, but keep it that way.
+.env
+.env.*
+!.env.example
+
+
+# ---- Logs, caches, scratch ----
+*.log
+npm-debug.log*
+yarn-error.log*
+.cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+
+# ---- Agent workflow scaffolding ----
+DESIGN.md
+PRODUCT.md
+
+
+# ---- Deliberately NOT ignored ----
+# .nojekyll      required by GitHub Pages, the site breaks without it
+# files/         the resource library, linked from resources.html
+# docs/          idea.md, spec.md, plan.md templates shipped to readers
+# app.js, styles.css, liquid-glass.js, index.html, resources.html

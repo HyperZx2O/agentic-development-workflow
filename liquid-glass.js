@@ -1,5 +1,5 @@
 /*!
- * liquid-glass.js — Apple-style liquid glass refraction for any element.
+ * liquid-glass.js: Apple-style liquid glass refraction for any element.
  *
  * Usage:
  *   <script src="liquid-glass.js"></script>
@@ -8,7 +8,7 @@
  * The module owns the SVG filter, displacement map, backdrop-filter wiring,
  * resize handling, and the frosted-blur fallback for browsers that can't do
  * SVG-filtered backdrops (Safari, Firefox). Visual dressing (tint, inner
- * highlight, glare, shadows) stays in your CSS — see GLASS.md for the recipe.
+ * highlight, glare, shadows) stays in your CSS; see GLASS.md for the recipe.
  *
  * Technique per https://aave.com/design/building-glass-for-the-web and
  * https://github.com/rizroze/liquid-glass
@@ -89,7 +89,7 @@
   }
 
   // Three displacement passes at staggered scales (R strongest), channels
-  // isolated with feColorMatrix and recombined with screen blends — the
+  // isolated with feColorMatrix and recombined with screen blends; the
   // faint prism fringe at the rim.
   function buildFilter(id, scales) {
     const filter = document.createElementNS(SVG_NS, "filter");

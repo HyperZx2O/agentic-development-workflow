@@ -45,7 +45,7 @@ These rules apply to every phase and every coding agent working on this project.
 6. **Preserve backward compatibility** unless a phase explicitly breaks it.
 7. **Update documentation whenever public-facing behavior changes.**
 8. **All acceptance criteria must pass before moving to the next phase.** Do not skip ahead.
-9. **Never leave a phase half-done.** A partial phase is worse than no phase — it creates hidden assumptions.
+9. **Never leave a phase half-done.** A partial phase is worse than no phase. It creates hidden assumptions..
 10. **Distinguish implemented features from planned ones** at all times. Never present a stub as complete.
 
 ---
@@ -66,7 +66,7 @@ Document every significant design choice here before implementation begins. Add 
 - **Consequences:** What does this decision make easier or harder going forward?
 ```
 
-### ADR-1: [First Decision — e.g., Language Choice]
+### ADR-1: [First Decision: e.g., Language Choice]
 
 - **Date:** [YYYY-MM-DD]
 - **Status:** Accepted
@@ -96,7 +96,7 @@ Document every significant design choice here before implementation begins. Add 
 ## Dependency Management
 
 - **Package manager:** [npm / pip / cargo / go mod / other]
-- **Lock file committed:** [Yes / No — should almost always be Yes]
+- **Lock file committed:** [Yes / No: should almost always be Yes]
 - **Rule for adding dependencies:** [e.g., "Must be justified in a PR description and reviewed"]
 - **Security audit cadence:** [e.g., "Run `npm audit` / `pip-audit` before every release"]
 - **Known constraints:** [e.g., "No GPL dependencies", "Must support Node 18+"]
@@ -112,7 +112,7 @@ Document every significant design choice here before implementation begins. Add 
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `[VAR_NAME]` | [Yes/No] | [default or —] | [What it controls] |
+| `[VAR_NAME]` | [Yes/No] | [default or omit] | [What it controls] |
 
 ---
 
@@ -123,8 +123,8 @@ Skip phases that don't apply. Common skips by project type:
 | Project Type | Typically Skip |
 |---|---|
 | CLI Tool | Phase 6 (Real-time), Phase 10 (Security Hardening if no network) |
-| Frontend Only | Phase 5 (Business Logic Engine — move to Phase 4), Phase 9 (Persistence) |
-| Library / Package | Phase 6 (Real-time), Phase 9 (Persistence), Phase 11 (Deployment — replace with publish) |
+| Frontend Only | Phase 5 (Business Logic Engine: move to Phase 4), Phase 9 (Persistence) |
+| Library / Package | Phase 6 (Real-time), Phase 9 (Persistence), Phase 11 (Deployment: replace with publish) |
 | ML Pipeline | Phase 6 (Real-time), replace Phase 4 with Model Training, Phase 9 with Dataset Management |
 | Static Site | Phase 6, Phase 9, Phase 10 |
 | Mobile App | Phase 6 optional, Phase 9 use device storage |
@@ -172,7 +172,7 @@ Skip phases that don't apply. Common skips by project type:
 5. Produce a high-level architecture diagram (Mermaid, Excalidraw, or ASCII) showing the major components and how data flows between them. Save it to `docs/architecture.[ext]`.
 6. Identify all external dependencies (third-party APIs, services, hardware) and their failure modes.
 7. Complete ADR-1 through ADR-N for all major decisions.
-8. Define the data model at a high level — entities, relationships, key fields.
+8. Define the data model at a high level: entities, relationships, key fields.
 9. Agree on naming conventions, folder structure, and code style before Phase 1 begins.
 
 ### Acceptance Criteria
@@ -210,7 +210,7 @@ Skip phases that don't apply. Common skips by project type:
 2. Create the folder structure:
    ```
    [project-root]/
-   ├── src/                    # or lib/, app/, pkg/ — match language conventions
+   ├── src/                    # or lib/, app/, pkg/, matching language conventions
    │   ├── [entry-point].[ext] # main, index, app, main.py, etc.
    │   ├── [core/]             # domain logic (added in Phase 2)
    │   ├── [interfaces/]       # API routes, CLI commands, UI components (Phase 3+)
@@ -230,7 +230,7 @@ Skip phases that don't apply. Common skips by project type:
 3. Install and pin core dependencies only. No feature dependencies yet.
 4. Implement the config module: load all env vars, validate required ones, export a single config object. Fail fast if required vars are missing.
 5. Implement the logger utility: `log.info`, `log.warn`, `log.error` with timestamps. Keep it swappable.
-6. Add a minimal health/smoke check — the simplest possible proof the project runs:
+6. Add a minimal health/smoke check, the simplest possible proof the project runs:
    - **Backend/API:** `GET /health` returns `200 { "status": "ok" }`
    - **Frontend:** Root route renders without errors
    - **CLI:** `--version` or `--help` exits `0`
@@ -281,12 +281,12 @@ Skip phases that don't apply. Common skips by project type:
    ```
 3. Implement factory functions / constructors / schemas for each entity. Each factory must return a valid, fully-populated entity with no undefined or null fields that aren't explicitly optional.
 4. Implement the core data store or registry:
-   - `getAll()` — returns all entities
-   - `getById(id)` — returns entity or `null` (never throws for a missing ID)
-   - `getBy[Field](value)` — returns filtered list or `null` for an unrecognised key
-   - `create(data)` — validates and inserts
-   - `update(id, patch)` — validates, merges, updates `updatedAt`
-   - `delete(id)` — removes or soft-deletes
+   - `getAll()`: returns all entities
+   - `getById(id)`: returns entity or `null` (never throws for a missing ID)
+   - `getBy[Field](value)`: returns filtered list or `null` for an unrecognised key
+   - `create(data)`: validates and inserts
+   - `update(id, patch)`: validates, merges, updates `updatedAt`
+   - `delete(id)`: removes or soft-deletes
 5. If the project uses a database: define the schema/migration files now. Never write raw SQL or schema logic outside the designated models/schema layer.
 6. Seed the store with initial/test data so downstream phases have something to work with immediately.
 
@@ -296,7 +296,7 @@ Skip phases that don't apply. Common skips by project type:
 - [ ] `getAll()` returns the expected number of seeded entities.
 - [ ] `getById("nonexistent")` returns `null`, never throws.
 - [ ] `updatedAt` changes on update; `createdAt` never changes after creation.
-- [ ] No entity field is ever `undefined` — all optional fields are explicitly `null` or have a default.
+- [ ] No entity field is ever `undefined`. All optional fields are explicitly `null` or have a default.
 
 ### Common Pitfalls
 
@@ -319,7 +319,7 @@ Skip phases that don't apply. Common skips by project type:
 
 ### Interface Type (pick one or more, delete the rest)
 
-**Option A — REST API**
+**Option A: REST API**
 Standard response envelope for every endpoint:
 ```json
 // Success
@@ -328,23 +328,23 @@ Standard response envelope for every endpoint:
 { "success": false, "data": null, "timestamp": "ISO-8601", "error": { "code": "STRING_CODE", "message": "human readable" } }
 ```
 
-**Option B — GraphQL**
+**Option B: GraphQL**
 Define the schema in `src/schema.[graphql|ext]` before writing resolvers. Every resolver must handle errors without throwing unhandled exceptions to the client.
 
-**Option C — CLI**
+**Option C: CLI**
 Define the command tree: `[tool] <command> [subcommand] [--flags]`. Use `--help` on every command. Use exit codes: `0` success, `1` user error, `2` internal error.
 
-**Option D — UI / Frontend**
+**Option D: UI / Frontend**
 Define the component tree and routing structure. Every page must have a loading state, an error state, and an empty state before any data-fetching logic is added.
 
-**Option E — Library / SDK**
+**Option E: Library / SDK**
 Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Anything not exported from this file is private and subject to change without notice.
 
-**Option F — Other: [describe]**
+**Option F: Other, [describe]**
 
 ### Tasks
 
-1. Implement the standard response/output contract (see Interface Type above). Apply it to every response from this phase forward — no exceptions.
+1. Implement the standard response/output contract (see Interface Type above). Apply it to every response from this phase forward, no exceptions.
 2. Implement primary read operations for all core entities:
    - List all: `GET /api/[resources]` / `[tool] list [resource]` / `<ResourceList />` etc.
    - Get one: `GET /api/[resources]/:id` / `getById(id)` etc.
@@ -357,11 +357,11 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 
 ### Acceptance Criteria
 
-- [ ] Every response uses the standard contract — no raw objects or inconsistent shapes.
+- [ ] Every response uses the standard contract. No raw objects or inconsistent shapes.
 - [ ] All CRUD operations work end-to-end against the Phase 2 data layer.
 - [ ] Invalid input returns a `400`-equivalent with a useful error message, never a `500`.
 - [ ] A missing resource returns a `404`-equivalent, never an empty success.
-- [ ] No business logic lives in the interface layer — it only translates requests to domain calls and domain results to responses.
+- [ ] No business logic lives in the interface layer. It only translates requests to domain calls and domain results to responses.
 
 ### Common Pitfalls
 
@@ -421,8 +421,8 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 3. Implement any state machines, workflows, or multi-step processes:
    - Define all valid states and transitions.
    - Reject invalid transitions explicitly.
-4. Wire business logic into the interface layer from Phase 3 — the interface calls the business logic, not the other way around.
-5. Implement any scheduled or recurring tasks (cron jobs, polling loops, background workers) here — not in the interface layer.
+4. Wire business logic into the interface layer from Phase 3. The interface calls the business logic, not the other way around.
+5. Implement any scheduled or recurring tasks (cron jobs, polling loops, background workers) here, not in the interface layer.
 
 ### Acceptance Criteria
 
@@ -488,7 +488,7 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 
 1. Choose the persistence layer: [Relational DB / Document DB / Key-Value / File System / Object Storage / Device Storage].
 2. Write migration files (if applicable). Migrations are versioned, never edited after being applied.
-3. Implement the repository/data-access layer — all database calls go here, nowhere else.
+3. Implement the repository/data-access layer. All database calls go here, nowhere else.
 4. Replace in-memory store from Phase 2 with the persistent layer behind the same interface. The domain layer must not know the difference.
 5. Implement connection pooling, retry logic, and graceful degradation on database unavailability.
 6. Implement backup/restore procedure and document it in `docs/database.md`.
@@ -496,7 +496,7 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 ### Acceptance Criteria
 
 - [ ] Data persists across service restarts.
-- [ ] The domain layer uses the same interface as before — no domain code changed to accommodate persistence.
+- [ ] The domain layer uses the same interface as before. No domain code changed to accommodate persistence.
 - [ ] All database calls are confined to the repository layer.
 - [ ] Migration files are versioned and `[migrate command]` runs cleanly on a fresh database.
 - [ ] Service degrades gracefully (returns `503`-equivalent) when the database is unavailable, rather than crashing.
@@ -524,13 +524,13 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 3. Every integration adapter must:
    - Validate its configuration at startup (fail fast if credentials are missing or invalid).
    - Implement a retry strategy with exponential backoff and a configurable max attempt count.
-   - Never let an integration failure crash the core service — catch and log, degrade gracefully.
+   - Never let an integration failure crash the core service. Catch and log, degrade gracefully.
    - Be mockable for testing (accept a dependency-injected client or use an interface).
 4. Document rate limits and quota constraints for every external API in `docs/integrations.md`.
 
 ### Acceptance Criteria
 
-- [ ] Every integration is encapsulated in its own module — no third-party SDK calls scattered in business logic.
+- [ ] Every integration is encapsulated in its own module. No third-party SDK calls scattered in business logic.
 - [ ] Integration failures are caught and logged; the service continues operating in a degraded state.
 - [ ] All credentials are loaded from config, never hardcoded.
 - [ ] Integration adapters can be replaced with mocks in tests without changing business logic.
@@ -560,9 +560,9 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
    - Structured logs (JSON in production, human-readable in development).
    - Log levels respected via config.
    - Log: service start/stop, each request (method, path, status, duration), all errors, all significant state changes.
-4. **Metrics** *(optional but recommended)*: Instrument key operations — request count, error rate, latency percentiles, queue depth. Export to [Prometheus / Datadog / CloudWatch / other].
+4. **Metrics** *(optional but recommended)*: Instrument key operations: request count, error rate, latency percentiles, queue depth. Export to [Prometheus / Datadog / CloudWatch / other].
 5. **Tracing** *(optional)*: Add distributed tracing if this is a multi-service project.
-6. Ensure async error forwarding is in place — every async handler catches its own errors and forwards them to the global handler.
+6. Ensure async error forwarding is in place. Every async handler catches its own errors and forwards them to the global handler.
 
 ### Acceptance Criteria
 
@@ -622,17 +622,17 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 
 ### Tasks
 
-1. **Unit tests** — test every function in the business logic and domain layers in isolation:
+1. **Unit tests**: test every function in the business logic and domain layers in isolation:
    - Test the happy path, every error path, and every edge case.
    - Use test fixtures, not production data.
    - Aim for high coverage of business logic (not UI boilerplate).
-2. **Integration tests** — test that layers work together:
+2. **Integration tests**: test that layers work together:
    - Interface → Business Logic → Domain: test the real wiring, not mocks.
    - Database integration: test against a real (test) database, not an in-memory mock.
-3. **End-to-end tests** *(if applicable)* — test the full system from the outside:
+3. **End-to-end tests** *(if applicable)*: test the full system from the outside:
    - Use the same interface a real user or consumer would use.
-   - Cover the primary user journeys only — don't over-specify E2E tests.
-4. **Contract tests** *(if applicable for multi-consumer projects)* — verify that all consumers' expectations match the actual API.
+   - Cover the primary user journeys only. Don't over-specify E2E tests.
+4. **Contract tests** *(if applicable for multi-consumer projects)*: verify that all consumers' expectations match the actual API.
 5. Add a `[test command]` script. All tests must pass before merging to the main branch.
 6. Set a coverage threshold and enforce it in CI: `[coverage target]%` on business logic.
 
@@ -723,7 +723,7 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 ### Acceptance Criteria
 
 - [ ] CI pipeline runs automatically on every PR and fails on lint errors, type errors, or test failures.
-- [ ] Main branch is protected — cannot be pushed to directly.
+- [ ] Main branch is protected. Cannot be pushed to directly.
 - [ ] A developer starting fresh can run `[install] && [test]` and see all tests pass.
 
 ---
@@ -737,7 +737,7 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 ### Tasks
 
 1. **README.md** (root): Prerequisites, installation, environment setup, how to run, how to test, ports/addresses, 2–3 quick-start examples.
-2. **INTEGRATION.md** or `docs/api.md` (for APIs and libraries): Every public endpoint, event, or exported function — name, parameters, return shape, example.
+2. **INTEGRATION.md** or `docs/api.md` (for APIs and libraries): Every public endpoint, event, or exported function: name, parameters, return shape, example.
 3. **docs/architecture.[ext]**: Up-to-date architecture diagram from Phase 0 (update it if the implementation diverged).
 4. **docs/adr/**: All ADRs, one file each: `ADR-001-[title].md`.
 5. **CONTRIBUTING.md**: How to set up the dev environment, run tests, submit a PR.
@@ -762,7 +762,7 @@ Define the public API surface in a single `index.[ext]` or `__init__.[ext]`. Any
 
 ### Tasks
 
-1. Confirm all environment variables are set in the deployment platform — never in code.
+1. Confirm all environment variables are set in the deployment platform, never in code.
 2. Confirm the health check / smoke check from Phase 1 passes on the deployed instance.
 3. Run the full test suite against the staging/production build before promoting.
 4. Tag the release in version control with a semantic version: `v[MAJOR].[MINOR].[PATCH]`.

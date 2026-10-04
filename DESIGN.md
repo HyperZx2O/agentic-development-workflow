@@ -29,15 +29,15 @@ Paper band is dark, cool-violet. One molten-brass accent. Coral chord for the ve
 | `--color-filament-core` | `oklch(80% 0.17 50)` | filament gradient core |
 | `--color-filament-halo` | `oklch(80% 0.16 50 / 0.22)` | filament outer halo |
 
-Strategy: **Committed** — the molten brass does load-bearing work on the apparatus and CTAs; the dark violet is the surface.
+Strategy: **Committed**. The molten brass does load-bearing work on the apparatus and CTAs; the dark violet is the surface.
 
 ## Typography
 
 Three families, three weights max.
 
-- **Display:** Instrument Serif 400 — lowercase, upright (no italics anywhere). Hero headline, section numbers, footer statement.
-- **Body:** Geist 400/500/600 — prose, buttons, links.
-- **Label:** JetBrains Mono 400/500 — UPPERCASE eyebrows, callouts, meter labels, copy buttons, code.
+- **Display:** Instrument Serif 400. Lowercase, upright (no italics anywhere). Hero headline, section numbers, footer statement.
+- **Body:** Geist 400/500/600. Prose, buttons, links.
+- **Label:** JetBrains Mono 400/500. UPPERCASE eyebrows, callouts, meter labels, copy buttons, code.
 
 Two-register rule (Lumen): all prose lowercase (CSS `text-transform: lowercase` on body, HTML written normally for a11y); mono labels UPPERCASE. No italic anywhere.
 
@@ -66,8 +66,8 @@ Reveal discipline: only the journey flow strip and phase 0 animate on scroll; re
 
 ## Components
 
-- **Nav:** N5 Floating pill — fixed, centered, `backdrop-filter: blur(14px)`, rounded-full, detached from edges.
-- **Footer:** Ft5 Statement — one large display sentence, wordmark + muted meta below.
+- **Nav:** N5 Floating pill. Fixed, centered, `backdrop-filter: blur(14px)`, rounded-full, detached from edges.
+- **Footer:** Ft5 Statement. One large display sentence, wordmark + muted meta below.
 - **Apparatus:** hand-built filament chamber (pure CSS, no img), hero-right, leader-line mono callouts with real values.
 - **Meter strip:** full-bleed band of 60-80 procedurally-varied ticks (sine envelope), mono labels at both ends.
 - **Copy buttons:** 8-state discipline, mono UPPERCASE, success state flips to a check.

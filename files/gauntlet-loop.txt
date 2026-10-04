@@ -1,0 +1,17 @@
+Claude Code
+I want you to build [THING] at the level of [REFERENCE]. It should be utterly perfect, [DESCRIBE THE LOOK/FEEL], with every single thing done at [TIER] quality, from [AREA_1] to [AREA_2] to anything you could think of.
+
+Fan out sub-agents and have sub-agents tackle each subsystem individually so that the [THING] is utterly perfect. You should /loop on each item and have a separate sub-agent check it [HOW TO CHECK] to ensure it is [TIER]. That separate sub-agent should be a really harsh critic: "good enough" is a fail. If it doesn't pass, restart that subsystem from scratch and loop again.
+
+Don't stop until each sub-agent is utterly wowed with the quality when compared with [REFERENCE]. It should literally compare them side by side blind and say which one is better. Use ultracode.
+
+
+
+OpenCode
+I want you to build [THING] at the level of [REFERENCE]. It should be utterly perfect, [DESCRIBE THE LOOK/FEEL], with every single thing done at [TIER] quality, from [AREA_1] to [AREA_2] to anything you could think of.
+
+Break the work into subsystems. Spawn a separate task for each subsystem and have them build in parallel. For each subsystem, spawn a second completely separate task as a blind critic. Give it fresh context only, no knowledge of how the builder approached it. The critic opens the actual output and compares it side by side against [REFERENCE]. It makes one binary call: which one is better.
+
+If the critic picks [REFERENCE], the builder task restarts that subsystem from scratch. The critic runs again with fresh context. Repeat until the critic picks ours.
+
+Do not stop until every subsystem has a critic that picked ours over [REFERENCE] in a blind comparison. The critic must be a harsh judge: "good enough" is a fail. Only identical or better passes.

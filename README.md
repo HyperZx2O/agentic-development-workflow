@@ -48,12 +48,11 @@ The whole thing runs like a loop. Plan, code, test, review, and repeat. Each pha
 
 ### Tools
 
-- [**Claude**](https://claude.ai/) — for ideation, plan generation.
-- [**OpenCode**](https://opencode.ai/) — your local AI coding agent that reads your directory and generates code. If your OpenCode quota ever runs out, switch over to Mimo Code rather than stopping.
-- [**Mimo Code**](https://mimo.xiaomi.com/coder) — an OpenCode clone but with Mimo models.
-- [**Freebuff**](https://freebuff.com/) — another coding agent I like that gives you 6 hour free coding sessions daily.
-- [**Git**](https://git-scm.com/) — one branch per team member, nobody pushes to main directly
-- [**Terax**](https://terax.app/) or another terminal emulator — worth using in place of Powershell
+- [**Claude**](https://claude.ai/): for ideation, plan generation.
+- [**OpenCode**](https://opencode.ai/): your local AI coding agent that reads your directory and generates code.
+- Or any other coding agent: [**Freebuff**](https://freebuff.com/) for 6-hour free sessions daily, [**Cline**](https://cline.bot/), or [**Antigravity CLI**](https://antigravity.google/product/antigravity-cli). Swap one in when your OpenCode quota runs out rather than stopping. Every prompt below works the same.
+- [**Git**](https://git-scm.com/): one branch per team member, nobody pushes to main directly
+- [**Terax**](https://terax.app/) or another terminal emulator: worth using in place of Powershell
 
 ### CLI and Skills Setup
 
@@ -62,8 +61,8 @@ Install these globally before any project. The same skills then work in whicheve
 | Skill | Purpose | When to load | Install |
 |-------|---------|--------------|---------|
 | `ponytail` | Forces minimal, non-overengineered code | Every phase | `npx skills add DietrichGebert/ponytail` |
-| `hallmark` | Anti-slop UI generation — picks structure and theme before building | Frontend build phases | `npx skills add nutlope/hallmark` |
-| `impeccable` | 59-rule UI audit — catches AI design slop after generation | Frontend audit phases | `npx impeccable install` |
+| `hallmark` | Anti-slop UI generation: picks structure and theme before building | Frontend build phases | `npx skills add nutlope/hallmark` |
+| `impeccable` | 59-rule UI audit: catches AI design slop after generation | Frontend audit phases | `npx impeccable install` |
 
 ---
 
@@ -147,8 +146,8 @@ After you're done finalizing your idea with Claude, upload the `spec.md` to it w
 **Prompt:**
 ```
 Here is the spec template. 
-Based on everything we've discussed about this project — the idea, the users, the constraints, and the tech choices — fill this out completely and in detail. Remove any `[CONDITIONAL]` sections that don't apply to this project type. Never leave a field blank; if something is genuinely not applicable, write "N/A" with a one-line reason. 
-For the architecture, data flow, and acceptance criteria sections, be especially thorough — these are what the coding agent relies on most. Be ruthless about scope: if we didn't discuss it, it goes in Out of Scope, not in Must-Have. 
+Based on everything we've discussed about this project (the idea, the users, the constraints, and the tech choices), fill this out completely and in detail. Remove any `[CONDITIONAL]` sections that don't apply to this project type. Never leave a field blank; if something is genuinely not applicable, write "N/A" with a one-line reason. 
+For the architecture, data flow, and acceptance criteria sections, be especially thorough. These are what the coding agent relies on most. Be ruthless about scope: if we didn't discuss it, it goes in Out of Scope, not in Must-Have. 
 This file is the single source of truth. Everything the coding agent builds will trace back to it.
 ```
 
@@ -217,7 +216,7 @@ Read these files before doing anything:
 - context/spec.md
 - context/plan.md
 
-Skills active this session: ponytail [+ hallmark or impeccable by phase — see table]
+Skills active this session: ponytail [+ hallmark or impeccable by phase, see table]
 
 Do not write any code yet. Confirm you have read them by summarizing:
 1. What this project does
@@ -338,34 +337,34 @@ Read the following files completely before doing anything:
 - context/spec.md
 - context/plan-[name].md
 
-Then scan the entire codebase — every file this member was responsible for.
+Then scan the entire codebase: every file this member was responsible for.
 
 Cross-reference what exists in the codebase against every task and acceptance 
 criterion in plan-[name].md. Then review as a senior engineer.
 
 Report in this exact order:
 
-1. COVERAGE — For every phase and task in plan-[name].md, state whether it is 
+1. COVERAGE: For every phase and task in plan-[name].md, state whether it is 
    fully implemented, partially implemented, or missing entirely. Be specific 
    about what is missing.
 
-2. SPEC DRIFT — Does what was built match what spec.md required? List every 
+2. SPEC DRIFT: Does what was built match what spec.md required? List every 
    deviation, no matter how small.
 
-3. BUGS & ERRORS — Obvious bugs, unhandled error states, missing edge cases, 
+3. BUGS & ERRORS: Obvious bugs, unhandled error states, missing edge cases, 
    hardcoded values that should be environment variables.
 
-4. SECURITY — Any credentials, keys, or sensitive data exposed. Any input that 
+4. SECURITY: Any credentials, keys, or sensitive data exposed. Any input that 
    is not validated. Any endpoint that is not protected when it should be.
 
-5. SCOPE CREEP — Anything built that does not appear in plan-[name].md or
+5. SCOPE CREEP: Anything built that does not appear in plan-[name].md or
    spec.md. List the file and the specific addition.
 
-6. MERGE RISK — Any file, function, or data structure likely to conflict with 
+6. MERGE RISK: Any file, function, or data structure likely to conflict with 
    other members' branches based on PLAN-SHARED conventions and overlapping 
    scope.
 
-7. VERDICT — Is this branch ready to merge to main, or does something need 
+7. VERDICT: Is this branch ready to merge to main, or does something need 
    fixing first? List every blocking issue explicitly.
 
 Be blunt. Do not soften findings. Do not mention anything positive unless 

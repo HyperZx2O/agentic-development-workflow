@@ -37,9 +37,9 @@
 
 Pick one honestly:
 
-- [ ] Safe — working demo matters more than originality
-- [ ] Balanced — solid idea, realistic scope
-- [ ] Ambitious — big idea, acceptable if partially done
+- [ ] Safe: working demo matters more than originality
+- [ ] Balanced: solid idea, realistic scope
+- [ ] Ambitious: big idea, acceptable if partially done
 
 ---
 
@@ -64,7 +64,7 @@ After the list, recommend the top 2 based on my judging criteria and team streng
 ## 6. Idea Selection & Sharpening (fill after picking an idea)
 
 - **Selected idea:**
-- **Why this one:** (honest reason — judges, feasibility, interest)
+- **Why this one:** (honest reason: judges, feasibility, interest)
 - **The one-sentence pitch:**
 - **What the demo moment looks like:** (the 30 seconds that wins)
 - **What we are cutting to hit the deadline:**
