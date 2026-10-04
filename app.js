@@ -1,9 +1,10 @@
-/* app.js — progress bar, phase dropdown, reveals, copy buttons, meter strip, ticker, spotlight, magnetic, tilt, split-text, scroll-top, resources search + preview */
+/* app.js: progress bar, phase dropdown, reveals, copy buttons, meter strip, ticker, spotlight, magnetic, tilt, split-text, scroll-top, resources search + preview */
 
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduceTransparency = window.matchMedia("(prefers-reduced-transparency: reduce)").matches;
   var lenisInstance = null;
 
   function revealAll() {
@@ -21,13 +22,45 @@
       anchors: true,
       autoToggle: true,
       syncTouch: true,
-      lerp: 0.09,
-      wheelMultiplier: 0.85,
+      lerp: 0.11,
+      wheelMultiplier: 0.95,
       touchMultiplier: 0.85,
       allowNestedScroll: true,
       stopInertiaOnNavigate: true
     });
   })();
+
+  /* ---- spring system: shared critically-damped integrator for cursor effects ---- */
+  var springBalls = [];
+  var springRaf = null, springLast = 0;
+  function Leaf(initial, write) {
+    var target = initial, value = initial, vel = 0;
+    var k = 170, c = 2 * Math.sqrt(k);
+    this.set = function (t) { target = t; };
+    this.settled = function () { return Math.abs(target - value) < 0.05 && Math.abs(vel) < 0.05; };
+    this.step = function (dt) {
+      vel += (k * (target - value) - c * vel) * dt;
+      value += vel * dt;
+    };
+    this.flush = function () { write(value); };
+  }
+  function springTrack(leaf) {
+    if (springBalls.indexOf(leaf) === -1) springBalls.push(leaf);
+    if (springRaf === null) { springLast = 0; springRaf = requestAnimationFrame(springTick); }
+  }
+  function springTick(now) {
+    if (!springLast) springLast = now;
+    var dt = Math.min((now - springLast) / 1000, 1 / 30);
+    springLast = now;
+    var running = false;
+    for (var i = 0; i < springBalls.length; i++) {
+      springBalls[i].step(dt);
+      if (!springBalls[i].settled()) running = true;
+    }
+    for (var j = 0; j < springBalls.length; j++) springBalls[j].flush();
+    if (!running) { springBalls.length = 0; springRaf = null; }
+    else { springRaf = requestAnimationFrame(springTick); }
+  }
 
   /* ---- meter strip: procedurally varied bars (sine envelope) ---- */
   (function meter() {
@@ -126,7 +159,7 @@
     update();
   })();
 
-  /* ---- reveal on scroll ---- */
+  /* ---- reveal on scroll (reversible: in on enter, out on leave) ---- */
   (function reveal() {
     var items = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window) || reduceMotion) {
@@ -136,13 +169,10 @@
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
+          entry.target.classList.toggle("is-in", entry.isIntersecting);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -12% 0px" }
     );
     items.forEach(function (el) { io.observe(el); });
   })();
@@ -172,10 +202,15 @@
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && panel.classList.contains("is-open")) {
-        e.stopPropagation();
-        setOpen(false, true);
-      }
+      if (!panel.classList.contains("is-open")) return;
+      if (e.key === "Escape") { e.stopPropagation(); setOpen(false, true); return; }
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault();
+      var idx = nodes.indexOf(document.activeElement);
+      if (e.key === "Home") { nodes[0].focus(); }
+      else if (e.key === "End") { nodes[nodes.length - 1].focus(); }
+      else if (e.key === "ArrowDown") { nodes[idx === -1 ? 0 : Math.min(idx + 1, nodes.length - 1)].focus(); }
+      else { nodes[idx === -1 ? nodes.length - 1 : Math.max(idx - 1, 0)].focus(); }
     });
 
     var nodes = Array.prototype.slice.call(panel.querySelectorAll(".phase-menu__item"));
@@ -193,7 +228,6 @@
         s.classList.toggle("is-active", idx === i);
       });
     }
-
     if (!("IntersectionObserver" in window)) {
       nodes.forEach(function (n) {
         n.addEventListener("click", function () {
@@ -234,8 +268,8 @@
   (function glass() {
     var els = document.querySelectorAll(".phase-menu__panel, .nav-pill");
     if (!els.length || typeof window.liquidGlass !== "function") return;
-    // ponytail: skip SVG glass on touch-primary devices — CSS frosted stays
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    // ponytail: skip SVG glass on touch-primary devices or reduced transparency; CSS frosted/solid stays
+    if (reduceTransparency || window.matchMedia("(pointer: coarse)").matches) return;
     els.forEach(function (el) {
       try {
         window.liquidGlass(el, { scale: -60, chroma: 4, blur: 5 });
@@ -363,42 +397,45 @@
     });
   })();
 
-  /* ---- magnetic buttons: lean toward the cursor ---- */
+  /* ---- magnetic buttons: lean toward the cursor, critically-damped ---- */
   (function magnetic() {
     var btns = document.querySelectorAll(".btn-fill, .btn-ghost, .cta-fill");
     if (!btns.length) return;
     if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     btns.forEach(function (btn) {
+      var mx = new Leaf(0, function (v) { btn.style.setProperty("--mx", v.toFixed(1) + "px"); });
+      var my = new Leaf(0, function (v) { btn.style.setProperty("--my", v.toFixed(1) + "px"); });
       btn.addEventListener("pointermove", function (e) {
         var r = btn.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width / 2);
-        var dy = e.clientY - (r.top + r.height / 2);
-        btn.style.setProperty("--mx", (dx * 0.25).toFixed(1) + "px");
-        btn.style.setProperty("--my", (dy * 0.25).toFixed(1) + "px");
+        mx.set((e.clientX - (r.left + r.width / 2)) * 0.25);
+        my.set((e.clientY - (r.top + r.height / 2)) * 0.25);
+        springTrack(mx); springTrack(my);
       });
       btn.addEventListener("pointerleave", function () {
-        btn.style.removeProperty("--mx");
-        btn.style.removeProperty("--my");
+        mx.set(0); my.set(0);
+        springTrack(mx); springTrack(my);
       });
     });
   })();
 
-  /* ---- tilt cards: subtle 3d lean on the tooling columns ---- */
+  /* ---- tilt cards: subtle 3d lean on the tooling columns, critically-damped ---- */
   (function tilt() {
     var cards = document.querySelectorAll(".tooling > div");
     if (!cards.length) return;
     if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     cards.forEach(function (card) {
+      var rx = new Leaf(0, function (v) { card.style.setProperty("--rx", v.toFixed(2) + "deg"); });
+      var ry = new Leaf(0, function (v) { card.style.setProperty("--ry", v.toFixed(2) + "deg"); });
       card.addEventListener("pointermove", function (e) {
         var r = card.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width - 0.5;
         var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.setProperty("--rx", (-py * 4).toFixed(2) + "deg");
-        card.style.setProperty("--ry", (px * 4).toFixed(2) + "deg");
+        rx.set(-py * 4); ry.set(px * 4);
+        springTrack(rx); springTrack(ry);
       });
       card.addEventListener("pointerleave", function () {
-        card.style.removeProperty("--rx");
-        card.style.removeProperty("--ry");
+        rx.set(0); ry.set(0);
+        springTrack(rx); springTrack(ry);
       });
     });
   })();
@@ -427,9 +464,7 @@
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-split-in");
-        io.unobserve(entry.target);
+        entry.target.classList.toggle("is-split-in", entry.isIntersecting);
       });
     }, { threshold: 0.4 });
     heads.forEach(function (h) { if (h.classList.contains("split-ready")) io.observe(h); });

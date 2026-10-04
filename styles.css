@@ -3,7 +3,7 @@
 
 /* ============ TOKENS ============ */
 :root {
-  /* color — hex fallback first, oklch overrides where supported */
+  /* color: hex fallback first, oklch overrides where supported */
   --color-paper: #16131f;
   --color-paper: oklch(13% 0.014 265);
   --color-paper-2: #1d1926;
@@ -16,6 +16,8 @@
   --color-ink-2: oklch(86% 0.008 262);
   --color-muted: #a29e9d;
   --color-muted: oklch(66% 0.012 262);
+  --color-muted-bright: #b3afae;
+  --color-muted-bright: oklch(72% 0.012 262);
   --color-accent: #e2a04a;
   --color-accent: oklch(76% 0.17 50);
   --color-accent-2: #d96a50;
@@ -96,6 +98,7 @@ body {
   font-size: var(--text-body);
   line-height: 1.65;
   text-transform: lowercase;
+  font-optical-sizing: auto;
   font-variant-numeric: tabular-nums;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
@@ -139,7 +142,7 @@ a:focus-visible, button:focus-visible {
   font-size: 0.72rem;
   letter-spacing: var(--tracking-micro);
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-muted-bright);
 }
 
 /* ============ SCROLL PROGRESS ============ */
@@ -185,7 +188,7 @@ a:focus-visible, button:focus-visible {
   color: var(--color-paper); background: var(--color-accent);
   padding: 0.5rem 1rem; border-radius: 999px; white-space: nowrap;
   transform: translate(var(--mx, 0px), var(--my, 0px));
-  transition: transform 120ms var(--ease-out-quart), filter 220ms var(--ease-soft);
+  transition: filter 220ms var(--ease-soft);
 }
 .cta-fill:hover { color: var(--color-paper); filter: brightness(1.08); }
 .cta-fill:active { transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.96); }
@@ -233,12 +236,13 @@ a:focus-visible, button:focus-visible {
   backdrop-filter: blur(18px) saturate(130%);
   -webkit-backdrop-filter: blur(18px) saturate(130%);
   box-shadow: 0 18px 48px -16px var(--color-shadow-toast);
-  opacity: 0; transform: translateY(-8px); visibility: hidden;
+  transform-origin: top right;
+  opacity: 0; transform: translateY(-8px) scale(0.98); visibility: hidden;
   transition: opacity 220ms var(--ease-soft), transform 220ms var(--ease-soft),
     visibility 0s linear 220ms;
 }
 .phase-menu__panel.is-open {
-  opacity: 1; transform: translateY(0); visibility: visible;
+  opacity: 1; transform: translateY(0) scale(1); visibility: visible;
   transition: opacity 220ms var(--ease-soft), transform 220ms var(--ease-soft),
     visibility 0s;
 }
@@ -301,9 +305,8 @@ a:focus-visible, button:focus-visible {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    /* ponytail: word-in (entrance) + text-shimmer (loop) must share one animation */
-    animation: text-shimmer 7s var(--ease-soft) 1s infinite,
-      word-in 620ms var(--ease-out-quart) 540ms forwards;
+    /* ponytail: word-in (entrance) only; text-shimmer was paint-per-frame, dropped */
+    animation: word-in 620ms var(--ease-out-quart) 540ms forwards;
   }
 }
 .hero__title em::after {
@@ -324,7 +327,7 @@ a:focus-visible, button:focus-visible {
   font-size: 0.9rem; font-weight: 500; padding: 0.7rem 1.4rem;
   border-radius: 999px; display: inline-block;
   transform: translate(var(--mx, 0px), var(--my, 0px));
-  transition: transform 120ms var(--ease-out-quart), filter 220ms var(--ease-soft);
+  transition: filter 220ms var(--ease-soft);
 }
 .btn-fill { background: var(--color-accent); color: var(--color-paper); }
 .btn-fill:hover { color: var(--color-paper); filter: brightness(1.08); }
@@ -345,7 +348,7 @@ a:focus-visible, button:focus-visible {
 }
 .btn-fill:hover::after, .cta-fill:hover::after { transform: translateX(340%) skewX(-18deg); }
 
-/* apparatus — filament chamber */
+/* apparatus: filament chamber */
 .apparatus { margin: 0; position: relative; margin-right: calc(-1 * var(--page-gutter)); transform: rotate(-6deg); }
 .chamber {
   position: relative; width: clamp(160px, 20vw, 260px);
@@ -370,7 +373,7 @@ a:focus-visible, button:focus-visible {
     0 0 16px 4px var(--color-glow),
     0 0 48px 12px var(--color-filament-halo);
   animation: filament-pulse var(--dur-pulse) ease-in-out infinite;
-  filter: brightness(calc(0.7 + var(--charge) * 0.6));
+  opacity: calc(0.7 + var(--charge) * 0.6);
 }
 .chamber__electrode {
   position: absolute; left: 0; right: 0; top: var(--y);
@@ -487,7 +490,6 @@ a:focus-visible, button:focus-visible {
 .tooling > div {
   position: relative; border-radius: 14px;
   transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 150ms ease-out;
 }
 .tooling > div::before {
   content: ""; position: absolute; inset: 0; border-radius: 14px; pointer-events: none;
@@ -518,7 +520,7 @@ a:focus-visible, button:focus-visible {
 /* ============ PROOF ============ */
 .proof-score { color: var(--color-accent); font-family: var(--font-mono); font-weight: 500; }
 
-/* star rating — hollow base + clipped accent fill */
+/* star rating: hollow base + clipped accent fill */
 .stars {
   display: inline-block; position: relative; vertical-align: middle;
   margin-left: var(--space-sm);
@@ -544,7 +546,7 @@ a:focus-visible, button:focus-visible {
 .proof-chart .chart-fill { fill: var(--color-glow); stroke: var(--color-accent); stroke-width: 1.5; }
 .proof-chart .chart-point { fill: var(--color-accent); }
 
-/* logo cloud — populated from the benchmark table */
+/* logo cloud: populated from the benchmark table */
 .logo-cloud {
   display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem;
   margin: var(--space-sm) 0 var(--space-md);
@@ -611,7 +613,7 @@ a:focus-visible, button:focus-visible {
   background: rgba(22, 19, 31, 0.60);
   background: color-mix(in oklch, var(--color-paper) 60%, transparent);
 }
-/* ponytail: tree blocks — first line (the folder) reads amber */
+/* ponytail: tree blocks: first line (the folder) reads amber */
 .prompt--tree pre::first-line { color: var(--color-accent); font-weight: 500; }
 .prompt pre {
   margin: 0; padding: 1rem 1.1rem;
@@ -629,12 +631,14 @@ a:focus-visible, button:focus-visible {
   padding: 0.45rem 1rem; min-height: 2.5rem;
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
-  transition: all 220ms var(--ease-soft);
+  transition: color 220ms var(--ease-soft), border-color 220ms var(--ease-soft),
+    background 220ms var(--ease-soft);
 }
 .copy-btn:hover { color: var(--color-ink); border-color: var(--color-ink); }
 .copy-btn:active { transform: translateY(1px); }
 .copy-btn.is-copied {
   color: var(--color-paper); background: var(--color-accent); border-color: var(--color-accent);
+  transition: color 0ms, background 0ms, border-color 0ms;
 }
 .copy-btn:disabled { opacity: 0.5; cursor: default; }
 .copy-btn:disabled:hover { color: var(--color-muted); border-color: var(--color-rule-2); }
@@ -643,6 +647,7 @@ a:focus-visible, button:focus-visible {
 
 /* ============ JOURNEY / PHASES ============ */
 .section--journey { position: relative; }
+
 .journey__ghost {
   position: absolute;
   top: -1.5rem; right: 0;
@@ -726,10 +731,10 @@ a:focus-visible, button:focus-visible {
 }
 .phase__meta {
   font-family: var(--font-mono); font-size: 0.72rem;
-  letter-spacing: 0.04em; color: var(--color-muted);
+  letter-spacing: 0.04em; color: var(--color-muted-bright);
   margin-bottom: var(--space-md);
 }
-.phase__meta strong { color: var(--color-muted); font-weight: 500; }
+.phase__meta strong { color: var(--color-muted-bright); font-weight: 500; }
 .phase__text { color: var(--color-ink-2); max-width: 64ch; margin-bottom: var(--space-md); }
 .phase__steps { margin: var(--space-sm) 0 var(--space-md) 1.2rem; }
 .phase__steps li {
@@ -766,7 +771,7 @@ a:focus-visible, button:focus-visible {
 #why .fix-list { max-width: none; margin-left: 0; margin-right: 0; }
 #why .fix-list li { border-color: rgba(22, 19, 31, 0.30); border-color: color-mix(in oklch, var(--color-paper) 30%, transparent); }
 #why .fix-list .section__sub { color: var(--color-paper); }
-#why .fix-list p, #why .section__body { color: #4a4540; color: color-mix(in oklch, var(--color-paper) 75%, var(--color-ink)); }
+#why .fix-list p, #why .section__body { color: #38332f; color: color-mix(in oklch, var(--color-paper) 85%, var(--color-ink)); }
 #why .fix-list p { max-width: 55ch; }
 #why .section__body { max-width: 72rem; }
 
@@ -843,9 +848,9 @@ a:focus-visible, button:focus-visible {
   .nav-pill__links a { padding: 0.45rem 0.6rem; }
   /* ponytail: mobile keeps only the wordmark + the last link ("resources"); hide the section links */
   .nav-pill__links li:not(:last-child) { display: none; }
-  /* ponytail: CTA hidden on mobile — GitHub link lives in the footer */
+  /* ponytail: CTA hidden on mobile; GitHub link lives in the footer */
   .cta-fill { display: none; }
-  /* ponytail: stepper hidden on mobile — the phase-menu dropdown already jumps */
+  /* ponytail: stepper hidden on mobile; the phase-menu dropdown already jumps */
   .step-progress { display: none; }
   .phase-menu__trigger { min-height: 2.75rem; }
   .phase-menu__item { min-height: 2.75rem; }
@@ -905,10 +910,6 @@ a:focus-visible, button:focus-visible {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
-@keyframes text-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
 
 @keyframes ghost-in {
   from { opacity: 0; transform: translateY(24px); }
@@ -944,6 +945,24 @@ a:focus-visible, button:focus-visible {
   .js .nav-pill { animation: none; }
   .toast { transition: none; }
   .phase-menu__panel { transition: none; }
+}
+
+/* ============ REDUCED TRANSPARENCY / CONTRAST ============ */
+@media (prefers-reduced-transparency: reduce) {
+  .nav-pill, .phase-menu__trigger, .phase-menu__panel, .res-preview, .toast {
+    background: var(--color-paper-2);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .nav-pill, .phase-menu__trigger, .phase-menu__panel, .res-preview, .toast {
+    background: var(--color-paper-2);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: var(--color-rule-2);
+    box-shadow: none;
+  }
 }
 
 /* ============ RESOURCES ============ */
@@ -1038,7 +1057,7 @@ a:focus-visible, button:focus-visible {
 .res-search__input:focus { border-color: var(--color-accent); }
 .res-search__count {
   font-family: var(--font-mono); font-size: 0.72rem;
-  color: var(--color-muted); white-space: nowrap;
+  color: var(--color-muted-bright); white-space: nowrap;
 }
 .res-row.is-filtered { display: none; }
 .res-none {
@@ -1133,17 +1152,13 @@ body::after {
 .scroll-top:hover { color: var(--color-ink); border-color: var(--color-ink); }
 .scroll-top.is-show { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 220ms var(--ease-soft), transform 220ms var(--ease-soft), visibility 0s; }
 
-/* ============ ANIMATED GRADIENT BORDER · command + tree blocks ============ */
+/* ============ GRADIENT BORDER · command + tree blocks ============ */
 .prompt--install, .prompt--tree {
   border: 1px solid transparent;
   background:
     linear-gradient(var(--color-paper-2), var(--color-paper-2)) padding-box,
     linear-gradient(110deg, var(--color-rule) 0%, var(--color-accent) 28%, var(--color-rule) 55%, var(--color-accent) 78%, var(--color-rule) 100%) border-box;
   background-size: 100% 100%, 300% 100%;
-  animation: border-flow 7s linear infinite;
-}
-@keyframes border-flow {
-  to { background-position: 0 0, 200% 0; }
 }
 
 /* ============ SPLIT-TEXT REVEAL · section + phase titles ============ */
